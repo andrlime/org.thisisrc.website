@@ -5,9 +5,11 @@ $accent3: #EF97F9;
 $accent4: #FFBAFF;
 $black: #181818;
 $white: #FAFAFA;
+$shift: -25%;
+$linepad: 0.6rem;
 //todo: add support for smaller screens
 //todo: add support for mobile devices
-//todo: add support to click a button on each menu to hide them -- this means the width of "center" needs to be increased. this can be in state.
+//todo: add support to click a button on each menu to hide them -- this means the width of "center" needs to be increased. this can be in react state.
 
 .menucont {
     //margin-top: 3rem;
@@ -17,7 +19,7 @@ $white: #FAFAFA;
     width: 100%;
     height: fit-content;
     //used for DEBUG. If something isn't working, this will color the entire flexbox.
-    background-color: yellow;
+    //background-color: yellow;
     justify-content: center;
     align-items: center;
     position: sticky;
@@ -26,26 +28,36 @@ $white: #FAFAFA;
     .center {
         //background-color: green;
         padding: 1rem;
+        padding-bottom: 0;
         width: 60%;
         height: 100vh;
         align-self: center;
     }
 
     .left { //navigation toolbar
-        //background-color: red;
+        background-color: #FFFFFF;
         padding: 1rem;
         padding-left: 0;
-        width: 13%;
+        width: fit-content;
         height: 100vh;
+        
         float: left;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        line-height: 0%;
+        align-items: flex-start;
+        line-height: 10%;
+
+        span {
+            line-height: 100%;
+        }
 
         .navitem {
-            margin: 1rem;
+            white-space: nowrap;
+            margin: 0.3rem;
+            margin-left: 0.9rem;
             //padding: 0.5rem;
+            //background-color: red;
             font-size: 1.5rem;
             color: $primary;
             font-weight: 800;
@@ -53,18 +65,25 @@ $white: #FAFAFA;
             width: fit-content;
             z-index: 10000;
 
+            span {
+                line-height: 100%;
+            }
 
             .underline {
-                padding: 0.6rem;
+                padding: $linepad;
                 width: 1%;
                 transform: translateX(10%);
+                position: relative;
                 z-index: -10000;
                 background-color: #FFFFFF00;
+                top: $shift;
                 transition: 400ms all;
             }
         }
 
         .navitem:hover {
+            cursor: pointer;
+
             .underline {
                 width: 100%;
                 z-index: -10000;
@@ -76,14 +95,16 @@ $white: #FAFAFA;
 
     .right { //key dates menu
         //background-color: rebeccapurple;
+        background-color: #FFFFFF;
         padding: 1rem;
-        width: 20%;
+        width: fit-content;
         height: 100vh;
         float: right;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-end;
         line-height: 10%;
 
         text-align: right;
@@ -98,28 +119,77 @@ $white: #FAFAFA;
         .datestr {
             font-weight: 300;
             font-size: 1.2rem;
+            line-height: 100%;
+            margin: 0.3rem;
+            white-space: nowrap;
 
             span {
                 font-weight: 600;
+            }
+        }
+
+        .navitem {
+            white-space: nowrap;
+            margin: 0.3rem;
+            margin-right: 0;
+            //padding: 0.5rem;
+            //background-color: red;
+            font-size: 1.5rem;
+            color: $primary;
+            font-weight: 800;
+            transition: 300ms all;
+            width: fit-content;
+            z-index: 10000;
+
+            span {
+                line-height: 100%;
+            }
+
+            .underline {
+                padding: $linepad;
+                width: 1%;
+                transform: translateX(-7%);
+                position: relative;
+                z-index: -10000;
+                background-color: #FFFFFF00;
+                top: $shift;
+                transition: 400ms all;
+            }
+        }
+
+        .navitem:hover {
+            cursor: pointer;
+
+            .underline {
+                width: 100%;
+                z-index: -10000;
+                background-color: #CA74D466;
+                transition: 400ms all;
             }
         }
     }
 }
 
 .footer {
-    background-color: $white;
+    //background-color: $white;
     padding: 1rem;
+    padding-top: 0.5rem;
     text-align: center;
     z-index: 10000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: $primary;
+    line-height: 0%;
 
+    a:hover {
+        text-decoration: underline;
+    }
 
     .imagebox {
         img {
-            width: 10%;
+            width: 5rem;
             margin: 1rem;
         }
     }
@@ -127,14 +197,17 @@ $white: #FAFAFA;
     .footerbox {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        width: 80%;
+        justify-content: space-between;
+        width: 100%;
+        line-height: 100%;
     
         p {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            padding: 0.2rem;
     
             span {
                 font-weight: 800;
+                white-space: nowrap;
             }
         }
     }
@@ -153,7 +226,6 @@ $white: #FAFAFA;
 .photos {
     padding: 1rem;
     width: 100%;
-    margin-bottom: 1rem;
     //height: 30%;
     background-color: lightblue;
     color: #FFF;
@@ -177,16 +249,52 @@ $white: #FAFAFA;
 }
 
 .maincont {
-    background-color:$white;
+    //background-color:$white;
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    min-width: 400px;
 }
 
 .logo {
     background-color: #EF97F9;
     padding: 3rem 5rem 3rem 5rem;
+    height: 8vh;
+    width: 15rem;
     position: absolute;
     top: 1rem;
     right: 1rem;
+    white-space: nowrap;
+}
+
+//okay...that was a mess. time for a little more organization.
+
+.leftarrow {
+    background-color: blue;
+    padding: 1rem;
+    position: absolute;
+    top: 50vh;
+    left: 10vw;
+    transition: 500ms all ease-in-out;
+}
+
+.leftarrow:hover {
+    transform: translateX(25%);
+    transition: 500ms all ease-in-out;
+}
+
+.rightarrow {
+    background-color: green;
+    padding: 1rem;
+    position: absolute;
+    top: 50vh;
+    right: 15vw;
+    transition: 500ms all ease-in-out;
+}
+
+.rightarrow:hover {
+    transform: translateX(-25%);
+    transition: 500ms all ease-in-out;
 }
