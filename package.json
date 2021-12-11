@@ -1,0 +1,28 @@
+{
+  "name": "independentstudywebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p $PORT"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewli06/IndependentStudyWebsite.git"
+  },
+  "author": "Andrew Li THIS 2022",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewli06/IndependentStudyWebsite/issues"
+  },
+  "homepage": "https://github.com/andrewli06/IndependentStudyWebsite#readme",
+  "dependencies": {
+    "next": "^12.0.7",
+    "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^17.0.2",
+    "react-typing-effect": "^2.0.5"
+  }
+}

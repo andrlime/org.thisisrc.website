@@ -1,0 +1,273 @@
+$primary: #82318E;
+$accent1: #A553B0;
+$accent2: #CA74D4;
+$accent3: #EF97F9;
+$accent4: #FFBAFF;
+$black: #181818;
+$white: #FFF;
+//todo: add support for smaller screens
+//todo: add support for mobile devices
+//todo: add support to click a button on each menu to hide them -- this means the width of "center" needs to be increased. this can be in react state.
+
+.earth {
+    display: flex;
+    //width: 100%;
+}
+
+.main {
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        //margin: 1.5rem;
+        padding: 0.8rem;
+        background-color: $accent1;
+        position: sticky;
+        top: 0;
+        align-items: center;
+        justify-content: space-between;
+
+
+        #logo {
+            width: 3rem;
+            transition: 500ms all;
+        }
+    }
+
+    .chead {
+        background-color: #A553B033;
+        padding-bottom: 2rem;
+        display: flex;
+        height: 90vh;
+        min-height: 700px;
+        justify-content: center;
+        //align-items: center;
+        
+        img {
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            z-index: -100;
+        }
+
+        p {
+            cursor: default;
+            font-size: 12rem;
+            font-weight: 800;
+            padding: 3rem;
+            z-index: 1000;
+            color: $accent1;
+            text-shadow: 0.5rem 0.5rem $white;
+        }
+    }
+}
+
+.sidebar {
+    padding: 1rem;
+    background-color: $black;
+    z-index: 10000;
+    height: 100%;
+    transition: 500ms all;
+    //transform: translateX(80%);
+    position: fixed;
+    right: 0;
+
+    .menu {
+        z-index: 1000000;
+        padding: 0.2rem;
+        margin: auto;
+        transition: 500ms all;
+        span {
+            display: block;
+            width: 2rem;
+            height: 0.25rem;
+            margin-bottom: 0.25rem;
+            position: relative;
+            transition: 300ms all;
+            background: $white;
+            border-radius: 3px;
+            
+            z-index: 1;
+        }
+    }
+
+    .menu:hover {
+        cursor: pointer;
+        span {
+            background: #888;
+            transition: 300ms all;
+        }
+    }
+
+    .menuactive:hover {
+        cursor: pointer;
+        span {
+            background: #888;
+            transition: 300ms all;
+        }
+    }
+
+    .menuactive {
+        z-index: 1000000;
+        padding: 0.2rem;
+        margin: auto;
+        transform: translateY(0.5rem);
+        transition: 500ms all;
+        span {
+            display: block;
+            width: 2rem;
+            height: 0.25rem;
+            margin-bottom: 0.25rem;
+            position: relative;
+            transition: 300ms all;
+            background: $white;
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+        span:nth-child(1) {
+            transform: translateY(0.25rem) rotate(45deg);
+        }
+
+        span:nth-child(2) {
+            display: none;
+        }
+        
+        span:nth-child(3) {
+            transform: translateY(-0.25rem) rotate(-45deg);
+        }
+    }
+
+    .navlist {
+        padding: 1rem;
+        transform: translateY(2rem);
+
+        div {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: $white;
+            padding: 0.4em;
+            margin: 1rem;
+            margin-left: 0;
+        }
+
+        .underline {
+            transform: translateY(-1rem) translateX(1rem);
+            background-color: #18181800;
+            transition: 300ms all;
+        }
+
+        .underline:hover {
+            background-color: #FFBAFFAA;
+            transition: 300ms all;
+            cursor: pointer;
+        }
+    }
+}
+
+.mainContent {
+    padding: 2rem;
+    display: flex;
+    min-width: 1200px;
+
+    .photos {
+        width: 60%;
+        margin-right: 2rem;
+        .photo {
+            width: 100%;
+            margin-bottom: 2rem;
+            border-radius: 3rem;
+        }
+
+        .photo:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .timeline {
+        width: 30%;
+        padding: 1rem;
+        margin-left: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: row;
+
+        #box {
+            padding: 0.5rem;
+            margin-right: 2%;
+            height: 100%;
+            text-align: right;
+            font-size: 1.2rem;
+            display: flex;
+            color: #82318E;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .underline {
+                background-color: #82318E;
+                display: inline-block;
+                width: 2.5rem;
+                height: 5px;
+                padding: 0.5rem;
+                transform: translateX(1.5rem);
+            }
+
+            p {
+                hr {
+                    background-color: #82318E;
+                    border: 1px solid #82318E;
+                }
+
+                span {
+                    font-weight: 800;
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        #line {
+            text-align: center;
+            display: block;
+            height: 100%;
+            width: 0.5%;
+            padding: 0.5rem;
+            background-color: #82318E;
+        }
+    }
+}
+
+.footer {
+    background-color: #EF97F944;
+    text-align: center;
+    color: $primary;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    .imgbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 8%;
+            padding: 0.5rem;
+        }
+    }
+
+    .text {
+        padding-top: 1rem;
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+        span {
+            span {
+                font-weight: 800;
+            }
+        }
+    }
+
+}
