@@ -20,7 +20,7 @@ class App extends React.Component {
     let nav = [
       {name: "School Registration", link: "/register", active: 0},
       {name: "Project Submissions", link: "/submit", active: 0},
-      {name: "About Us", link: "/about", active: 0},
+      {name: "About Us", link: "/about", active: 1},
       {name: "Contact Us", link: "/contact", active: 0}
     ];
 
@@ -49,14 +49,11 @@ class App extends React.Component {
         </div>
 
         <div className={styles.navlist} style={{display: this.state.menu ? "inline-block" : "none"}}>
+
           {nav.map((item, i) => (
-            <div className={item.active==0 ? styles.underline : styles.overline}>
-              
-              <a href={item.link}>{item.name}</a>
-              
-              
-            </div>
+            <div className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
           ))}
+
         </div>
 
       </div>
@@ -66,44 +63,21 @@ class App extends React.Component {
           <a href="/"><img id={styles.logo} src="/this-logo.png"/></a>
         </div>
 
-        <div style={{backgroundImage: "url(/background-test.jpeg)", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}} className={styles.chead}> 
-        <ReactTypingEffect text={words} cursorRenderer={cursor => <h1>{cursor}</h1>} eraseDelay="3000" speed="60" eraseSpeed="60" typingDelay="1000" cursor=" "
-        displayTextRenderer={(text, i) => {
-          return (
-            <p>
-              {text.split('').map((char, i) => {
-                const key = `${i}`;
-                return (
-                  <span
-                    key={key}
-                  >{char}</span>
-                );
-              })}
-            </p>
-          );
-        }}/></div>
-
         <div className={styles.mainContent}>
+          
+          <div style={{width: "60%"}}>
+            <img src="/background-test.jpeg" className={styles.about__img}/>
 
-          <div className={styles.photos}>
-            <img className={styles.photo} src="/photos/pres1.jpeg"/>
-            <img className={styles.photo} src="/photos/pres2.jpeg"/>
-            <img className={styles.photo} src="/photos/pres3.jpeg"/>
-            <img className={styles.photo} src="/photos/lab.jpeg"/>
-            <img className={styles.photo} src="/photos/dhodh-models.jpeg" style={{border: "1px solid black"}}/>
-          </div>
+            <p className={styles.about__head}>What is the ISRC?</p>
+            <p className={styles.about__text}>The <b>International Schools Research Colloquium (ISRC)</b> is a unique forum for high school students to showcase their academic prowess. Tsinghua International School invites seniors currently engaged in academic research at their schools, to this first-of-its-kind conference to share and celebrate your research journeys. The colloquium will include panel discussions, displays, student and teacher-led workshops and more.</p>
 
-          <div className={styles.timeline}>
-            <div id={styles.box}>
+            <img src="/photos/core-values.jpeg" className={styles.about__img} style={{width: "40%"}}/>
 
-              <p id={styles.tltext}>Timeline</p>
+            <p className={styles.about__head}>About Tsinghua International School</p>
+            <p className={styles.about__text}><b>Tsinghua International School (THIS)</b>, founded in 2009, is affiliated to Tsinghua University. We are an integration of Chinese and Western education and culture combined with the Tsinghua spirit. Our mission is to foster creative critical thinkers who are rooted in China and prepared to lead in the global community.</p>
 
-              {dates.map((item, i)=> (
-                <p><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
-              ))}
-
-
-            </div>
+            <p className={styles.about__head}>Research at THIS – The Independent Study Program</p>
+            <p className={styles.about__text}>In the last year of high school, students can choose to undertake the bespoke <b>Independent Study pathway</b> in addition to their required coursework. Independent Study is research project designed by individual students under the supervision of a teacher. It demonstrates our highest benchmark of inquiry, innovation and leadership. Students have ventured into research in various fields and disciplines ranging from Art, Archeology, Political Science, International Relations, to Math, Biochemistry, Musical Composition, Filmmaking and more.</p>
           </div>
 
         </div>

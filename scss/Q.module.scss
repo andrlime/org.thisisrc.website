@@ -26,6 +26,7 @@ $white: #FFF;
         top: 0;
         align-items: center;
         justify-content: space-between;
+        width: 100vw;
 
 
         #logo {
@@ -149,6 +150,7 @@ $white: #FFF;
             padding: 0.4em;
             margin: 1rem;
             margin-left: 0;
+            width: fit-content;
         }
 
         .underline {
@@ -162,6 +164,13 @@ $white: #FFF;
             transition: 300ms all;
             cursor: pointer;
         }
+
+        .overline {
+            transform: translateY(-1rem) translateX(1rem);
+            background-color: #FFBAFFAA;
+            transition: 300ms all;
+            cursor: pointer;
+        }
     }
 }
 
@@ -170,9 +179,30 @@ $white: #FFF;
     display: flex;
     min-width: 1200px;
 
+    .about__img {
+        width: 70%;
+    }
+
+    .about__head {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #82318E;
+    }
+
+    .about__text {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #181818;
+
+        a:hover {
+            text-decoration: underline;
+            transition: 500ms all;
+        }
+    }
+
     .photos {
-        width: 60%;
-        margin-right: 2rem;
+        width: 50%;
+        margin-right: 15%;
         .photo {
             width: 100%;
             margin-bottom: 2rem;
@@ -181,6 +211,70 @@ $white: #FFF;
 
         .photo:last-child {
             margin-bottom: 0;
+        }
+    }
+
+    .form {
+        #formhead {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $primary;
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #A553B0;
+        }
+
+        span {
+            font-size: 1.2rem;
+            font-weight: 350;
+            color: #A553B0;
+        }
+
+        input, textarea, select {
+            padding: 0.2rem;
+            margin: 0.5rem;
+            font-size: 1rem;
+            color: #82318E;
+            border-radius: 1rem;
+            padding: 0.2rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        textarea {
+            min-height: 150px;
+            min-width: 350px;
+            max-height: 250px;
+            max-width: 700px;
+            margin-bottom: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        #wcword {
+            font-size: 0.8rem;
+        }
+
+        button {
+            border: none;
+            padding: 0.8rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-radius: 0.5rem;
+            color: $primary;
+            font-size: 1.2rem;
+            font-weight: 800;
+            background-color: $accent4;
+            transition: 500ms all;
+        }
+
+        button:hover {
+            background-color: #82318E;
+            color: white;
+            transition: 500ms all;
+            cursor: pointer;
         }
     }
 
@@ -195,25 +289,22 @@ $white: #FFF;
 
         #box {
             padding: 0.5rem;
-            margin-right: 2%;
+            margin-right: 1%;
             height: 100%;
             text-align: right;
             font-size: 1.2rem;
             display: flex;
             color: #82318E;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
 
-            .underline {
-                background-color: #82318E;
-                display: inline-block;
-                width: 2.5rem;
-                height: 5px;
-                padding: 0.5rem;
-                transform: translateX(1.5rem);
+            #tltext {
+                font-weight: 900;
+                font-size: 1.5rem;
             }
 
             p {
+                line-height: 20%;
                 hr {
                     background-color: #82318E;
                     border: 1px solid #82318E;
@@ -270,4 +361,8 @@ $white: #FFF;
         }
     }
 
+}
+
+#star {
+    color: #FF2211;
 }
