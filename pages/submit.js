@@ -7,8 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({menu: false, phone: isMobile,
-      formColors: {type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, code: 0},
-      formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", code: ""},
+      formColors: {type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, schoolName: 0, code: 0},
+      formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", schoolName: "", code: ""},
       message: "",
       wordcount: 0,
       boxType: "Abstract"
@@ -28,6 +28,19 @@ class App extends React.Component {
     this.email = this.email.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.typeHandler = this.typeHandler.bind(this);
+    this.snhandler = this.snhandler.bind(this);
+  }
+
+  snhandler(e) {
+    let colors = this.state.formColors;
+    let data = this.state.formData;
+    if(e.target.value == "") {
+      colors.schoolName = 2;
+    } else {
+      colors.schoolName = 1;
+    }
+    data.schoolName = e.target.value;
+    this.setState({formColors: colors, formData: data});
   }
 
   typeHandler(e) {
@@ -160,10 +173,13 @@ class App extends React.Component {
       colors.code = 1;
     }
 
-    data.code = e.target.value;
-
-    if(data.code.length != 4) {
+    if(data.code.length != 7) {
       colors.code = 2;
+      data.code = e.target.value;
+    }
+
+    if(data.code.length == 3) {
+      data.code += "-";
     }
 
     this.setState({formColors: colors, formData: data});
@@ -179,21 +195,10 @@ class App extends React.Component {
       {name: "School Registration", link: "/register", active: 0},
       {name: "Project Submissions", link: "/submit", active: 1},
       {name: "About Us", link: "/about", active: 0},
-      {name: "Contact Us", link: "/contact", active: 0}
+      {name: "Contact Us", link: "/contact", active: 0},
+      {name: "Dates & Deadlines", link: "/timeline", active: 0}
     ];
-
-    let dates = [
-      {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
-      {date: new Date('2022-05-01T00:00:00'), desc: "Research Conference", longdesc: ""}
-    ];
-
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    //todo: make the timeline more interactive
-
     let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
-    let words = ["Research", "Innovation", "Discovery"];
-
     let colors = ["#82318E", "#119911", "#FF2211"];
 
     return (
@@ -259,7 +264,7 @@ class App extends React.Component {
               <span>Verify Email: <span id={styles.star}>*</span> <br/><input onChange={this.verifyHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.verify]}`}} required value={this.state.formData.verify}></input><br/></span>
               <span>School Code (case sensitive!): <span id={styles.star}>*</span> <br/><input onChange={this.codeHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.code]}`}} required value={this.state.formData.code}></input><br/></span>
 
-              <p style={{width: "50%"}}>Please submit your information here. You will receive an e-mail confirming submission. If we need additional information, we will contact you.</p>
+              <p style={{width: "80%"}}>Please submit your information here. You will receive an e-mail confirming submission. If we need additional information, we will contact you.</p>
 
               <button onClick={this.submitHandler}>Submit</button>
             </div>
@@ -271,10 +276,10 @@ class App extends React.Component {
           <div className={styles.imgbox}><img src="logo-spartan.svg"/><img src="this-logo.png"/>
           </div>
 
-          <div className={styles.text}><span>Privacy Policy</span>
-          <span>Terms and Conditions</span>
+          <div className={styles.text}>
           <span>Powered by React</span>
-          <span>Designed by <span>Andrew Li</span></span></div>
+          <span>Designed by <span>Andrew Li</span></span>
+          </div>
 
           
 
@@ -288,7 +293,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Tsinghua International School Research Conference 2022</title>
+        <title>THIS ISRC 2022 - Submission</title>
+        <link rel="icon" href="/logo-spartan.svg" />
       </Head>
       <App/>
     </>

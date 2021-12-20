@@ -20,10 +20,17 @@ class App extends React.Component {
       {name: "School Registration", link: "/register", active: 0},
       {name: "Project Submissions", link: "/submit", active: 0},
       {name: "About Us", link: "/about", active: 0},
-      {name: "Contact Us", link: "/contact", active: 1},
-      {name: "Dates & Deadlines", link: "/timeline", active: 0}
+      {name: "Contact Us", link: "/contact", active: 0},
+      {name: "Dates & Deadlines", link: "/timeline", active: 1}
     ];
     let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
+
+    let dates = [
+      {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
+      {date: new Date('2022-05-01T00:00:00'), desc: "Research Conference", longdesc: ""}
+    ];
+
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     return (
       <div className={styles.earth}>
@@ -54,12 +61,18 @@ class App extends React.Component {
 
         <div className={styles.mainContent}>
           
-          <div style={{width: "80%"}}>
-            <p className={styles.about__head}>Contact Email Addresses</p>
-            <p className={styles.about__text}>If you want to contact us, please email one of the below emails based on your query:</p>
-            <p className={styles.about__text}><b>Have questions about our research conference?</b> Please email <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn.</a></p>
-            <p className={styles.about__text}><b>Found a bug on the website?</b> Please email <a href="mailto:andrew_li22@this.edu.cn">andrew_li22@this.edu.cn.</a></p>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+          <div className={styles.tlbig} style={{width: "80%"}}>
+            <p>Timeline</p>
+
+            {dates.map((item, i)=> (
+              <p><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
+            ))}
+
+            <p>More updates will come soon! Check this page often!</p>
+            <br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
           </div>
 
         </div>
@@ -86,7 +99,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>THIS ISRC 2022 - Contact</title>
+        <title>THIS ISRC 2022 - About Us</title>
         <link rel="icon" href="/logo-spartan.svg" />
       </Head>
       <App/>

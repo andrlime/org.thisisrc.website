@@ -27,6 +27,7 @@ $white: #FFF;
         align-items: center;
         justify-content: space-between;
         width: 100vw;
+        min-width: 900px;
 
 
         #logo {
@@ -39,17 +40,10 @@ $white: #FFF;
         background-color: #A553B033;
         padding-bottom: 2rem;
         display: flex;
-        height: 90vh;
+        height: 100vh;
         min-height: 700px;
         justify-content: center;
         //align-items: center;
-        
-        img {
-            height: 100%;
-            object-fit: contain;
-            position: absolute;
-            z-index: -100;
-        }
 
         p {
             cursor: default;
@@ -66,7 +60,7 @@ $white: #FFF;
 .sidebar {
     padding: 1rem;
     background-color: $black;
-    z-index: 10000;
+    z-index: 999;
     height: 100%;
     transition: 500ms all;
     //transform: translateX(80%);
@@ -78,6 +72,7 @@ $white: #FFF;
         padding: 0.2rem;
         margin: auto;
         transition: 500ms all;
+        width: fit-content;
         span {
             display: block;
             width: 2rem;
@@ -114,6 +109,7 @@ $white: #FFF;
         margin: auto;
         transform: translateY(0.5rem);
         transition: 500ms all;
+        width: fit-content;
         span {
             display: block;
             width: 2rem;
@@ -365,4 +361,91 @@ $white: #FFF;
 
 #star {
     color: #FF2211;
+}
+
+.modal {
+    z-index: 100000;
+    background-color: #82318E77;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: $white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 80vw;
+    height: 80%;
+    transition: 300ms all;
+
+    .button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        z-index: 10000;
+    }
+
+    .button:hover {
+        cursor: pointer;
+    }
+}
+
+.modalBlack {
+    background-color: #00000088;
+    z-index: 1000;
+    padding: 2rem;
+    color: $white;
+    font-size: 1.5rem;
+    font-weight: 900;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+    height: 100%;
+    transition: 300ms all;
+}
+
+.modalButton {
+    background-color: $primary;
+    position: fixed;
+    border: 3px solid $primary;
+    top: 10%;
+    left: 1%;
+    width: 15%;
+    min-width: 250px;
+    padding: 1rem;
+    color: $white;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+    0.3em 0.3em 1em rgba(0,0,0,0.3);
+    transition: 200ms all;
+    border-radius: 1rem;
+}
+
+.modalButton:hover {
+    cursor: pointer;
+    border: 3px solid $primary;
+    background: #FFFFFF22;
+    color: $primary;
+    transition: 200ms all;
+    box-shadow: none;
+}
+
+.tlbig {
+    color: $primary;
+    p:nth-child(1) {
+        font-weight: 900;
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    span {
+        font-weight: 900;
+        margin-right: 1rem;
+    }
 }

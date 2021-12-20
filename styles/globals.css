@@ -16,3 +16,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.stopscroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  border-radius: 1rem;
+}

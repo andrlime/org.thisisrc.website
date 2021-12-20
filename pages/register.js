@@ -121,21 +121,11 @@ class App extends React.Component {
       {name: "School Registration", link: "/register", active: 1},
       {name: "Project Submissions", link: "/submit", active: 0},
       {name: "About Us", link: "/about", active: 0},
-      {name: "Contact Us", link: "/contact", active: 0}
+      {name: "Contact Us", link: "/contact", active: 0},
+      {name: "Dates & Deadlines", link: "/timeline", active: 0}
     ];
-
-    let dates = [
-      {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
-      {date: new Date('2022-05-01T00:00:00'), desc: "Research Conference", longdesc: ""}
-    ];
-
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    //todo: make the timeline more interactive
 
     let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
-    let words = ["Research", "Innovation", "Discovery"];
-
     let colors = ["#82318E", "#119911", "#FF2211"];
 
     return (
@@ -192,10 +182,10 @@ class App extends React.Component {
           <div className={styles.imgbox}><img src="logo-spartan.svg"/><img src="this-logo.png"/>
           </div>
 
-          <div className={styles.text}><span>Privacy Policy</span>
-          <span>Terms and Conditions</span>
+          <div className={styles.text}>
           <span>Powered by React</span>
-          <span>Designed by <span>Andrew Li</span></span></div>
+          <span>Designed by <span>Andrew Li</span></span>
+          </div>
 
           
 
@@ -209,7 +199,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Tsinghua International School Research Conference 2022</title>
+        <title>THIS ISRC 2022 - Registration</title>
+        <link rel="icon" href="/logo-spartan.svg" />
       </Head>
       <App/>
     </>
