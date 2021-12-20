@@ -2,7 +2,6 @@ import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
 import {isMobile} from 'react-device-detect';
-import ReactTypingEffect from 'react-typing-effect';
 
 class App extends React.Component {
   constructor(props) {
