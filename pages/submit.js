@@ -95,19 +95,23 @@ class App extends React.Component {
   abstractHandler(e) {
     let colors = this.state.formColors;
     let data = this.state.formData;
+    let rx_words = /(\s)/g;
+    let wc = [...e.target.value.matchAll(rx_words)];
     if(e.target.value == "") {
       colors.abstract = 2;
     } else {
       colors.abstract = 1;
 
-      if(e.target.value.split(' ').length > 250) {
+      if(wc.length+1 > 250) {
         colors.abstract = 2;
       }
     }
 
     data.abstract = e.target.value;
+    //data.abstract = wc
+    console.log(wc, wc.length+1);
 
-    this.setState({formColors: colors, formData: data, wordcount: e.target.value.split(' ').length});
+    this.setState({formColors: colors, formData: data, wordcount: wc.length+1});
   }
 
   disciplineHandler(e) {

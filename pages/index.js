@@ -56,8 +56,23 @@ class App extends React.Component {
       <div className={styles.earth}>
 
         <div className={styles.modalButton} onClick={this.modalHandler} style={{display: this.state.videoModal ? "none" : "block"}}>
+          <div className={styles.wrapper}>
 
-          Watch Our Independent Study Video!
+            <div>
+              <svg version="1.1" x="0px" y="0px"
+                viewBox="0 0 64 64" >
+                <path d="M15.2,15c3,0,5.5,2.5,5.5,5.5s-2.5,5.5-5.5,5.5s-5.5-2.5-5.5-5.5S12.2,15,15.2,15 M15.2,9C8.9,9,3.8,14.1,3.8,20.5
+                  s5.1,11.5,11.5,11.5s11.5-5.1,11.5-11.5S21.6,9,15.2,9L15.2,9z"/>
+                <path d="M36.5,15c3,0,5.5,2.5,5.5,5.5s-2.5,5.5-5.5,5.5s-5.5-2.5-5.5-5.5S33.5,15,36.5,15 M36.5,9c-6.3,0-11.5,5.1-11.5,11.5
+                  s5.1,11.5,11.5,11.5S48,26.8,48,20.5S42.9,9,36.5,9L36.5,9z"/>
+                <rect x="6.8" y="34" width="38.3" height="17.8" style={{strokeWidth: "6", strokeMiterlimit: "10"}}/>
+                <polygon style={{strokeWidth: "6", strokeMiterlimit: "10"}} points="41.3,42.6 59.2,53 59.2,32.3 "/>
+              </svg>
+            </div>
+
+            <div id={styles.text}>Watch Our Independent Study Video!</div>
+
+          </div>
 
         </div> 
 
@@ -102,7 +117,7 @@ class App extends React.Component {
             <a href="/"><img id={styles.logo} src="/this-logo.png"/></a>
           </div>
 
-          <div style={{backgroundImage: "url(/photos/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
+          <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
           <ReactTypingEffect text={words} cursorRenderer={cursor => <h1>{cursor}</h1>} eraseDelay="3000" speed="40" eraseSpeed="40" typingDelay="1000" cursor=" "
           displayTextRenderer={(text, i) => {
             return (
@@ -122,11 +137,16 @@ class App extends React.Component {
           <div className={styles.mainContent}>
 
             <div className={styles.photos}>
-              <img className={styles.photo} src="/photos/pres1.jpeg"/>
-              <img className={styles.photo} src="/photos/pres2.jpeg"/>
-              <img className={styles.photo} src="/photos/pres3.jpeg"/>
-              <img className={styles.photo} src="/photos/lab.jpeg"/>
-              <img className={styles.photo} src="/photos/dhodh-models.jpeg" style={{border: "1px solid black"}}/>
+
+              {[["http://d2yg8h2dgs5f44.cloudfront.net/pres1.jpeg", "50", "30"],
+              ["http://d2yg8h2dgs5f44.cloudfront.net/pres2.jpeg", "50", "30"],
+              ["http://d2yg8h2dgs5f44.cloudfront.net/pres3.jpeg", "50", "30"],
+              ["http://d2yg8h2dgs5f44.cloudfront.net/lab.jpeg", "50", "30"],
+              ["http://d2yg8h2dgs5f44.cloudfront.net/dhodh-models.jpeg", "50", "20"]].map((i, index) => (
+                <div className={styles.img__colorpreload} style={{backgroundImage: `url(${i[0]})`, width: `${i[1]}rem`, height: `${i[2]}rem`, marginBottom: "2rem", backgroundPosition: "center"}}/>
+              ))
+              }
+
             </div>
 
             <div className={styles.timeline}>

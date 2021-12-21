@@ -55,12 +55,12 @@ class App extends React.Component {
         <div className={styles.mainContent}>
           
           <div style={{width: "60%"}}>
-            <img src="/photos/this-bldg.jpeg" className={styles.about__img}/>
+            <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/this-bldg.jpeg)", width: "50rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
 
             <p className={styles.about__head}>What is the ISRC?</p>
             <p className={styles.about__text}>The <b>International Schools Research Colloquium (ISRC)</b> is a unique forum for high school students to showcase their academic prowess. Tsinghua International School invites seniors currently engaged in academic research at their schools, to this first-of-its-kind conference to share and celebrate your research journeys. The colloquium will include panel discussions, displays, student and teacher-led workshops and more.</p>
 
-            <img src="/photos/core-values.jpeg" className={styles.about__img} style={{width: "40%"}}/>
+            <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/core-values.jpeg)", width: "30rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
 
             <p className={styles.about__head}>About Tsinghua International School</p>
             <p className={styles.about__text}><b>Tsinghua International School (THIS)</b>, founded in 2009, is affiliated to Tsinghua University. We are an integration of Chinese and Western education and culture combined with the Tsinghua spirit. Our mission is to foster creative critical thinkers who are rooted in China and prepared to lead in the global community.</p>

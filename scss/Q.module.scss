@@ -28,6 +28,7 @@ $white: #FFF;
         justify-content: space-between;
         width: 100vw;
         min-width: 900px;
+        z-index: 5;
 
 
         #logo {
@@ -50,7 +51,7 @@ $white: #FFF;
             font-size: 12rem;
             font-weight: 800;
             padding: 3rem;
-            z-index: 1000;
+            z-index: 2;
             color: $accent1;
             text-shadow: 0.5rem 0.5rem $white;
         }
@@ -60,7 +61,7 @@ $white: #FFF;
 .sidebar {
     padding: 1rem;
     background-color: $black;
-    z-index: 999;
+    z-index: 6;
     height: 100%;
     transition: 500ms all;
     //transform: translateX(80%);
@@ -68,7 +69,7 @@ $white: #FFF;
     right: 0;
 
     .menu {
-        z-index: 1000000;
+        z-index: 5;
         padding: 0.2rem;
         margin: auto;
         transition: 500ms all;
@@ -82,7 +83,6 @@ $white: #FFF;
             transition: 300ms all;
             background: $white;
             border-radius: 3px;
-            
             z-index: 1;
         }
     }
@@ -104,7 +104,7 @@ $white: #FFF;
     }
 
     .menuactive {
-        z-index: 1000000;
+        z-index: 5;
         padding: 0.2rem;
         margin: auto;
         transform: translateY(0.5rem);
@@ -176,7 +176,7 @@ $white: #FFF;
     min-width: 1200px;
 
     .about__img {
-        width: 70%;
+        width: 100%;
     }
 
     .about__head {
@@ -364,7 +364,7 @@ $white: #FFF;
 }
 
 .modal {
-    z-index: 100000;
+    z-index: 4;
     background-color: #82318E77;
     border-radius: 2rem;
     padding: 1.5rem;
@@ -383,7 +383,7 @@ $white: #FFF;
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
-        z-index: 10000;
+        z-index: 3;
     }
 
     .button:hover {
@@ -393,7 +393,7 @@ $white: #FFF;
 
 .modalBlack {
     background-color: #00000088;
-    z-index: 1000;
+    z-index: 2;
     padding: 2rem;
     color: $white;
     font-size: 1.5rem;
@@ -407,31 +407,65 @@ $white: #FFF;
 }
 
 .modalButton {
-    z-index: 1000000;
+    z-index: 7;
     background-color: $primary;
     position: fixed;
-    border: 3px solid $primary;
     top: 10%;
     left: 1%;
     width: 15%;
-    min-width: 250px;
-    padding: 1rem;
-    color: $white;
-    font-weight: 900;
-    text-align: center;
+    min-width: 16rem;
     box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
     0.3em 0.3em 1em rgba(0,0,0,0.3);
-    transition: 200ms all;
-    border-radius: 1rem;
+    text-align: left;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    color: $primary;
+    font-size: 1rem;
+    font-weight: 800;
+    background-color: $accent4;
+    transition: 400ms all;
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        div:nth-child(1) {
+            width: 3rem;
+        }
+
+        #text {
+            margin-left: 0.5rem;
+        }
+
+        svg {
+            fill: #82318E;
+
+            polygon, rect {
+                stroke: $primary;
+            }
+        }
+    }
 }
 
 .modalButton:hover {
     cursor: pointer;
-    border: 3px solid $primary;
-    background: #FFFFFF22;
-    color: $primary;
-    transition: 200ms all;
+    transition: 400ms all;
     box-shadow: none;
+    background-color: #82318E;
+    color: white;
+
+    .wrapper {
+        svg {
+            fill: white;
+
+            polygon, rect {
+                stroke: white;
+            }
+        }
+    }
 }
 
 .tlbig {
@@ -450,3 +484,29 @@ $white: #FFF;
         margin-right: 1rem;
     }
 }
+
+.img__colorpreload {
+    display: block;
+    background-color: #DEDEDE;
+    transition: 500ms all;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    border: 1px solid #DDD;
+}
+
+.img__colorpreload:hover {
+    transform: scale(1.05);
+}
+
+/**
+z indexes
+
+1 1
+1000 2
+10000 3
+100000 4
+1000000 5
+1000001 6
+10000000 7
+**/
