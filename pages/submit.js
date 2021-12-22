@@ -15,7 +15,8 @@ class App extends React.Component {
       boxType: "Abstract",
       showConfirmationModal: false,
       submitModal: false,
-      schoolName: ""
+      schoolName: "",
+      apiON: false
     });
     this.menuHandler = this.menuHandler.bind(this);
     this.nameHandler = this.nameHandler.bind(this);
@@ -29,8 +30,8 @@ class App extends React.Component {
     this.submitHandler = this.submitHandler.bind(this);
     this.typeHandler = this.typeHandler.bind(this);
     this.snhandler = this.snhandler.bind(this);//school name
-    this.modalHandler = this.modalHandler.bind(this);//confirm screen
 
+    this.modalHandler = this.modalHandler.bind(this);//confirm screen
     this.post = this.post.bind(this); // post to database
     this.submitModalHandler = this.submitModalHandler.bind(this);
   }
@@ -71,18 +72,26 @@ class App extends React.Component {
       console.log("VALID submission. CONTINUE.");
 
       axios
-      .get("http://localhost:25000/api/schools/" + this.state.formData.code)
-      .then((res) => {
-        console.log(res);
-        if(res.data == null) {
-          console.log("Invalid code.");
-        } else {
-          console.log(res.data.schoolname);
-          this.setState({schoolName: res.data.schoolname});
-        }
-      });
+      .get("http://localhost:25000/api", {})
+      .then(R => {
+        this.setState({apiON: true});
 
-      this.modalHandler(e);
+        axios
+        .get("http://localhost:25000/api/schools/" + this.state.formData.code)
+        .then((res) => {
+          if(res.data == null) {
+            console.log("Invalid code.");
+          } else {
+            this.setState({schoolName: res.data.schoolname});
+          }
+        });
+  
+        this.modalHandler(e);
+    }).catch(err => {
+      this.setState({submitModal: false, showConfirmationModal: false, message: "There was an error. Please try again. If this continues, please send us an email with your registration info."});
+      document.body.classList.remove("stopscroll");
+      window.scrollTo(0, 0);
+    });
     } else {
       console.log("INVALID submission. STOP.");
       let str = "The form has errors. Please correct them and submit again.";
@@ -160,7 +169,7 @@ class App extends React.Component {
 
     data.abstract = e.target.value;
     //data.abstract = wc
-    console.log(wc, wc.length+1);
+    //console.log(wc, wc.length+1);
 
     this.setState({formColors: colors, formData: data, wordcount: wc.length+1});
   }
@@ -245,32 +254,41 @@ class App extends React.Component {
   post(e) {
     e.preventDefault();
 
-    if(this.state.schoolName) {
-      let student = {
-        type: this.state.formData.type,
-        name: this.state.formData.name,
-        title: this.state.formData.title,
-        abstract: this.state.formData.abstract,
-        discipline: this.state.formData.abstract,
-        email: this.state.formData.email,
-        school: this.state.schoolName
-      };
-   
-      axios
-        .post("http://localhost:25000/api/students/add", student)
-        .then((res) => console.log(res.data));
+    axios
+      .get("http://localhost:25000/api", {})
+      .then(R => {
+        this.setState({apiON: true});
 
-      //post succeeded
-      this.setState({submitModal: true, showConfirmationModal: false});
+        if(this.state.schoolName) {
+          let student = {
+            type: this.state.formData.type,
+            name: this.state.formData.name,
+            title: this.state.formData.title,
+            abstract: this.state.formData.abstract,
+            discipline: this.state.formData.abstract,
+            email: this.state.formData.email,
+            school: this.state.schoolName
+          };
+       
+          axios
+            .post("http://localhost:25000/api/students/add", student)
+            .then((res) => {
+              this.setState({submitModal: true, showConfirmationModal: false});
+            });
+        } else {
+          let colors = this.state.formColors;
+          colors.code = 2;
+    
+          this.setState({message: "You entered an invalid school code.", showConfirmationModal: false, formColors: colors});
+          document.body.classList.remove("stopscroll");
+          window.scrollTo(0, 0);
+        }
 
-    } else {
-      let colors = this.state.formColors;
-      colors.code = 2;
-
-      this.setState({message: "You entered an invalid school code.", showConfirmationModal: false, formColors: colors});
+    }).catch(err => {
+      this.setState({submitModal: false, showConfirmationModal: false, message: "There was an error. Please try again. If this continues, please send us an email with your registration info."});
       document.body.classList.remove("stopscroll");
       window.scrollTo(0, 0);
-    }
+    });
   }
 
   render() {
@@ -293,7 +311,7 @@ class App extends React.Component {
         <div className={styles.wrapper}>
           <>
           <p>Please confirm your submission.</p>
-          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark. If you see a red cross, please try submitting again.</p>
+          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark.</p>
           </>
 
           <div className={styles.wrapper__text}>
@@ -317,7 +335,7 @@ class App extends React.Component {
           <>
           <img src="/check.svg"/>
           <p>Success!</p>
-          <p>We will reach out to you via email within 48 hours. Please check your inbox! If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a></p>
+          <p>We will reach out to you via email within 48 hours. Please check your inbox! If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
           </>
         </div>
       </div> 

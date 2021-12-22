@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
 import {isMobile} from 'react-device-detect';
-import ReactTypingEffect from 'react-typing-effect';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +10,11 @@ class App extends React.Component {
     this.state = ({menu: false, phone: isMobile,
       formColors: {name: 0, contact: 0, position: 0, email: 0, verify: 0},
       formData: {name: "", contact: "", position: "", email: "", verify: ""},
-      message: ""
+      message: "",
+      showConfirmationModal: false,
+      submitModal: false,
+      schoolCode: "",
+      apiON: false
     });
     this.menuHandler = this.menuHandler.bind(this);
     this.nameHandler = this.nameHandler.bind(this);
@@ -19,16 +23,71 @@ class App extends React.Component {
     this.emailHandler = this.emailHandler.bind(this);
     this.verifyHandler = this.verifyHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.post = this.post.bind(this);
+    this.modalHandler = this.modalHandler.bind(this);//confirm screen
   }
 
   submitHandler(e) {
     if(this.state.formColors.name == 1 && this.state.formColors.contact == 1 && this.state.formColors.position == 1 && this.state.formColors.email == 1 && this.state.formColors.verify == 1) {
       //all green
-      //PUSH to database. write code.
+      //show confirmation screen. write code.
+      this.setState({showConfirmationModal: true});
+      document.body.classList.add("stopscroll")
     } else {
       let str = "The form has errors. Please correct them and submit again.";
-      this.setState({message: str})
+      this.setState({message: str});
     }
+  }
+
+  modalHandler(e) {
+    if(this.state.submitModal) {
+      let s = !this.state.submitModal;
+
+      if(s) {
+        document.body.classList.add("stopscroll")
+      } else {
+        document.body.classList.remove("stopscroll")
+      }
+  
+      this.setState({submitModal: s});
+    } else {
+      let s = !this.state.showConfirmationModal;
+
+      if(s) {
+        document.body.classList.add("stopscroll")
+      } else {
+        document.body.classList.remove("stopscroll")
+      }
+  
+      this.setState({showConfirmationModal: s});
+    }
+  }
+
+  post(e) {
+    e.preventDefault();
+
+    axios
+      .get("http://localhost:25000/api", {})
+      .then(R => {
+        this.setState({apiON: true});
+
+        let school = {
+          schoolname: this.state.formData.name,
+          contactname: this.state.formData.contact,
+          contactposition: this.state.formData.position,
+          contactemail: this.state.formData.email
+        };
+      
+        axios
+          .post("http://localhost:25000/api/schools/add", school)
+          .then(result => {
+            this.setState({submitModal: true, showConfirmationModal: false, schoolCode: result.data.code});
+          });
+    }).catch(err => {
+      this.setState({submitModal: false, showConfirmationModal: false, message: "There was an error. Please try again. If this continues, please send us an email with your registration info."});
+      document.body.classList.remove("stopscroll");
+      window.scrollTo(0, 0);
+    });
   }
 
   //1: green, 2: red
@@ -130,6 +189,41 @@ class App extends React.Component {
 
     return (
       <div className={styles.earth}>
+
+      <div className={styles.modalBlack} onClick={this.modalHandler} style={{display: (this.state.showConfirmationModal || this.state.submitModal) ? "block" : "none"}}></div>
+      <div className={styles.confirmModal} style={{display: this.state.showConfirmationModal ? "block" : "none"}}>
+        <div className={styles.wrapper}>
+          <>
+          <p>Please confirm your submission.</p>
+          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark.</p>
+          </>
+
+          <div className={styles.wrapper__text}>
+          <p>School Name: <span>{this.state.formData.name}</span></p>
+          <p>Contact Name: <span>{this.state.formData.contact}</span></p>
+          <p>Contact Position: <span>{this.state.formData.position}</span></p>
+          <p>Contact Email: <span>{this.state.formData.email}</span></p>
+          </div>
+          
+          <div id={styles.confirm__button}>
+          <button onClick={this.post}>Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.submitModal} style={{display: this.state.submitModal ? "block" : "none"}}>
+        <div className={styles.wrapper}>
+          <>
+          <img src="/check.svg"/>
+          <p>Success!</p>
+          <p>Your school code is</p>
+          <p style={{fontSize: "5rem", fontWeight: "900", color: "black", padding: "0.5rem", margin: "2rem"}}>{this.state.schoolCode}</p>
+          <p style={{fontWeight: "400"}}>Students must use this code to register. Take a screenshot of this page. Remember that the code is case-sensitive. We will reach out to you via email within 48 hours. If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
+          </>
+        </div>
+      </div> 
+
+
       <div className={styles.sidebar}>
 
         <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>

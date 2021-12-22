@@ -601,7 +601,7 @@ z indexes
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     width: 80vw;
-    height: 90%;
+    height: 75%;
     transition: 300ms all;
     line-height: 80%;
     text-align: center;
@@ -619,7 +619,11 @@ z indexes
         align-items: center;
 
         img {
-            width: 50%;
+            width: 30%;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     }
 
