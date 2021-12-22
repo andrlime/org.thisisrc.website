@@ -67,7 +67,7 @@ class App extends React.Component {
     e.preventDefault();
 
     axios
-      .get("http://localhost:25000/api", {})
+      .get("https://api.thisisrc.org/api", {})
       .then(R => {
         this.setState({apiON: true});
 
@@ -79,7 +79,7 @@ class App extends React.Component {
         };
       
         axios
-          .post("http://localhost:25000/api/schools/add", school)
+          .post("https://api.thisisrc.org/schools/add", school)
           .then(result => {
             this.setState({submitModal: true, showConfirmationModal: false, schoolCode: result.data.code});
           });

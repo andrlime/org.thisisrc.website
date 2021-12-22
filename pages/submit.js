@@ -72,12 +72,12 @@ class App extends React.Component {
       console.log("VALID submission. CONTINUE.");
 
       axios
-      .get("http://localhost:25000/api", {})
+      .get("https://api.thisisrc.org/api", {})
       .then(R => {
         this.setState({apiON: true});
 
         axios
-        .get("http://localhost:25000/api/schools/" + this.state.formData.code)
+        .get("https://api.thisisrc.org/schools/" + this.state.formData.code)
         .then((res) => {
           if(res.data == null) {
             console.log("Invalid code.");
@@ -255,7 +255,7 @@ class App extends React.Component {
     e.preventDefault();
 
     axios
-      .get("http://localhost:25000/api", {})
+      .get("https://api.thisisrc.org/api", {})
       .then(R => {
         this.setState({apiON: true});
 
@@ -271,7 +271,7 @@ class App extends React.Component {
           };
        
           axios
-            .post("http://localhost:25000/api/students/add", student)
+            .post("https://api.thisisrc.org/students/add", student)
             .then((res) => {
               this.setState({submitModal: true, showConfirmationModal: false});
             });
