@@ -52,7 +52,7 @@ $white: #FFF;
             font-weight: 800;
             padding: 3rem;
             z-index: 2;
-            color: $accent1;
+            color: $accent2;
             text-shadow: 0.5rem 0.5rem $white;
         }
     }
@@ -364,7 +364,7 @@ $white: #FFF;
 }
 
 .modal {
-    z-index: 4;
+    z-index: 9;
     background-color: #82318E77;
     border-radius: 2rem;
     padding: 1.5rem;
@@ -393,7 +393,7 @@ $white: #FFF;
 
 .modalBlack {
     background-color: #00000088;
-    z-index: 2;
+    z-index: 8;
     padding: 2rem;
     color: $white;
     font-size: 1.5rem;
@@ -510,3 +510,132 @@ z indexes
 1000001 6
 10000000 7
 **/
+
+.confirmModal {
+    z-index: 9;
+    background-color: $white;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: $primary;
+    font-size: 1.5rem;
+    font-weight: 900;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 80vw;
+    height: 90%;
+    transition: 300ms all;
+    line-height: 80%;
+    overflow: scroll;
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: scroll;
+
+        .wrapper__text {
+            
+            p {
+                font-size: 1.5rem;
+                font-weight: 900;
+            }
+        }
+
+        #confirm__button {
+            background-color: white;
+            padding: 1rem;
+            padding-bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    p:nth-child(2) {
+        font-weight: 400;
+        font-size: 1.2rem;
+    }
+
+    span {
+        font-weight: 300;
+        word-wrap: break-word;
+        font-size: 1.2rem;
+    }
+
+    button {
+        border: none;
+        padding: 0.8rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        border-radius: 0.5rem;
+        color: $primary;
+        font-size: 1.2rem;
+        font-weight: 800;
+        background-color: $accent4;
+        transition: 500ms all;
+        width: fit-content;
+        align-self: center;
+    }
+
+    button:hover {
+        background-color: #82318E;
+        color: white;
+        transition: 500ms all;
+        cursor: pointer;
+    }
+}
+
+.submitModal {
+    z-index: 9;
+    background-color: $white;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: $primary;
+    font-size: 1.5rem;
+    font-weight: 900;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 80vw;
+    height: 90%;
+    transition: 300ms all;
+    line-height: 80%;
+    text-align: center;
+    overflow: scroll;
+
+    p {
+        width: 80%;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: scroll;
+        align-items: center;
+
+        img {
+            width: 50%;
+        }
+    }
+
+    p:nth-child(2) {
+        font-size: 5rem;
+        margin: 2rem;
+    }
+
+    p:nth-child(3) {
+        font-weight: 400;
+        font-size: 1.2rem;
+    }
+
+    span {
+        font-weight: 300;
+        word-wrap: break-word;
+        font-size: 1.2rem;
+    }
+}

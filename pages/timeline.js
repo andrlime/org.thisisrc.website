@@ -23,6 +23,7 @@ class App extends React.Component {
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 1}
     ];
+    
     let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
 
     let dates = [
@@ -47,7 +48,7 @@ class App extends React.Component {
         <div className={styles.navlist} style={{display: this.state.menu ? "inline-block" : "none"}}>
 
           {nav.map((item, i) => (
-            <div className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
+            <div key={i} className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
           ))}
 
         </div>
@@ -65,7 +66,7 @@ class App extends React.Component {
             <p>Timeline</p>
 
             {dates.map((item, i)=> (
-              <p><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
+              <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
             ))}
 
             <p>More updates will come soon! Check this page often!</p>

@@ -40,7 +40,7 @@ class App extends React.Component {
         <div className={styles.navlist} style={{display: this.state.menu ? "inline-block" : "none"}}>
 
           {nav.map((item, i) => (
-            <div className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
+            <div key={i} className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
           ))}
 
         </div>

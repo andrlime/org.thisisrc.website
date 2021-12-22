@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
 import {isMobile} from 'react-device-detect';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,13 +12,12 @@ class App extends React.Component {
       formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", schoolName: "", code: ""},
       message: "",
       wordcount: 0,
-      boxType: "Abstract"
+      boxType: "Abstract",
+      showConfirmationModal: false,
+      submitModal: false,
+      schoolName: ""
     });
-    //Title, Presenter, School Abstract (250 words), Discipline (Science,
-    //Social Studies, Math, Language Arts, Fine Arts, Digital Arts, Physical Education),
-    //Email, code 
     this.menuHandler = this.menuHandler.bind(this);
-
     this.nameHandler = this.nameHandler.bind(this);
     this.titleHandler = this.titleHandler.bind(this);
     this.abstractHandler = this.abstractHandler.bind(this);
@@ -28,7 +28,11 @@ class App extends React.Component {
     this.email = this.email.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.typeHandler = this.typeHandler.bind(this);
-    this.snhandler = this.snhandler.bind(this);
+    this.snhandler = this.snhandler.bind(this);//school name
+    this.modalHandler = this.modalHandler.bind(this);//confirm screen
+
+    this.post = this.post.bind(this); // post to database
+    this.submitModalHandler = this.submitModalHandler.bind(this);
   }
 
   snhandler(e) {
@@ -53,19 +57,66 @@ class App extends React.Component {
     }
     data.type = e.target.value;
 
-    let box = data.type == "workshop" ? "Description" : "Abstract"
+    let box = data.type == "Workshop" ? "Description" : "Abstract"
 
     this.setState({formColors: colors, formData: data, boxType: box});
   }
 
   submitHandler(e) {
-    if(this.state.formColors.name == 1 && this.state.formColors.contact == 1 && this.state.formColors.position == 1 && this.state.formColors.email == 1 && this.state.formColors.verify == 1) {
+    //type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, schoolName: 0, code: 0
+
+    if(this.state.formColors.type == 1 && this.state.formColors.name == 1 && this.state.formColors.title == 1 && this.state.formColors.abstract == 1 && this.state.formColors.discipline == 1 && this.state.formColors.email == 1 && this.state.formColors.verify == 1 && this.state.formColors.code == 1) {
       //all green
       //PUSH to database. write code.
+      console.log("VALID submission. CONTINUE.");
+
+      axios
+      .get("http://localhost:25000/api/schools/" + this.state.formData.code)
+      .then((res) => {
+        console.log(res);
+        if(res.data == null) {
+          console.log("Invalid code.");
+        } else {
+          console.log(res.data.schoolname);
+          this.setState({schoolName: res.data.schoolname});
+        }
+      });
+
+      this.modalHandler(e);
     } else {
+      console.log("INVALID submission. STOP.");
       let str = "The form has errors. Please correct them and submit again.";
-      this.setState({message: str})
+      this.setState({message: str});
     }
+  }
+
+  //can add more functionality here
+  modalHandler(e) {
+    if(this.state.submitModal) {
+      this.submitModalHandler(e);
+    } else {
+      let s = !this.state.showConfirmationModal;
+
+      if(s) {
+        document.body.classList.add("stopscroll")
+      } else {
+        document.body.classList.remove("stopscroll")
+      }
+  
+      this.setState({showConfirmationModal: s});
+    }
+  }
+
+  submitModalHandler(e) {
+    let s = !this.state.submitModal;
+
+    if(s) {
+      document.body.classList.add("stopscroll")
+    } else {
+      document.body.classList.remove("stopscroll")
+    }
+
+    this.setState({submitModal: s});
   }
 
   nameHandler(e) {
@@ -177,21 +228,49 @@ class App extends React.Component {
       colors.code = 1;
     }
 
+    data.code = e.target.value;
+
     if(data.code.length != 7) {
       colors.code = 2;
-      data.code = e.target.value;
     }
 
-    if(data.code.length == 3) {
-      data.code += "-";
-    }
-
-    this.setState({formColors: colors, formData: data});
+    this.setState({formColors: colors, formData: data, schoolName: "..."});
   }
 
   menuHandler(e) {
     let cState = !this.state.menu;
     this.setState({menu: cState});
+  }
+
+  post(e) {
+    e.preventDefault();
+
+    if(this.state.schoolName) {
+      let student = {
+        type: this.state.formData.type,
+        name: this.state.formData.name,
+        title: this.state.formData.title,
+        abstract: this.state.formData.abstract,
+        discipline: this.state.formData.abstract,
+        email: this.state.formData.email,
+        school: this.state.schoolName
+      };
+   
+      axios
+        .post("http://localhost:25000/api/students/add", student)
+        .then((res) => console.log(res.data));
+
+      //post succeeded
+      this.setState({submitModal: true, showConfirmationModal: false});
+
+    } else {
+      let colors = this.state.formColors;
+      colors.code = 2;
+
+      this.setState({message: "You entered an invalid school code.", showConfirmationModal: false, formColors: colors});
+      document.body.classList.remove("stopscroll");
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {
@@ -202,11 +281,47 @@ class App extends React.Component {
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 0}
     ];
+
     let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
     let colors = ["#82318E", "#119911", "#FF2211"];
 
     return (
       <div className={styles.earth}>
+
+      <div className={styles.modalBlack} onClick={this.modalHandler} style={{display: (this.state.showConfirmationModal || this.state.submitModal) ? "block" : "none"}}></div>
+      <div className={styles.confirmModal} style={{display: this.state.showConfirmationModal ? "block" : "none"}}>
+        <div className={styles.wrapper}>
+          <>
+          <p>Please confirm your submission.</p>
+          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark. If you see a red cross, please try submitting again.</p>
+          </>
+
+          <div className={styles.wrapper__text}>
+          <p>Name: <span>{this.state.formData.name}</span></p>
+          <p>School: <span>{(this.state.schoolName!="...") ? this.state.schoolName : "You entered an invalid code."}</span></p>
+          <p>Title of Submission: <span>{this.state.formData.title}</span></p>
+          <p>Type of Submission: <span>{this.state.formData.type}</span></p>
+          <p>Discipline: <span>{this.state.formData.discipline}</span></p>
+          <p>Abstract: <span>{this.state.formData.abstract}</span></p>
+          <p>Email: <span>{this.state.formData.email}</span></p>
+          </div>
+          
+          <div id={styles.confirm__button}>
+          <button onClick={this.post}>Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.submitModal} style={{display: this.state.submitModal ? "block" : "none"}}>
+        <div className={styles.wrapper}>
+          <>
+          <img src="/check.svg"/>
+          <p>Success!</p>
+          <p>We will reach out to you via email within 48 hours. Please check your inbox! If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a></p>
+          </>
+        </div>
+      </div> 
+      
       <div className={styles.sidebar}>
 
         <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
@@ -220,7 +335,7 @@ class App extends React.Component {
         <div className={styles.navlist} style={{display: this.state.menu ? "inline-block" : "none"}}>
 
           {nav.map((item, i) => (
-            <div className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
+            <div key={i} className={item.active==0 ? styles.underline : styles.overline}><a href={item.link}>{item.name}</a></div>
           ))}
 
         </div>
@@ -241,9 +356,9 @@ class App extends React.Component {
               <span>Type of Submission: <span id={styles.star}>*</span> <br/><select onChange={this.typeHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.type]}`}} required value={this.state.formData.type}>
                 
                 <option value="n">Please Select</option>
-                <option value="poster">Poster Submission</option>
-                <option value="panel">Panel Submission</option>
-                <option value="workshop">Workshop Application</option>
+                <option value="Poster">Poster Submission</option>
+                <option value="Panel">Panel Submission</option>
+                <option value="Workshop">Workshop Application</option>
 
               </select><br/></span>
               <span>Your Name: <span id={styles.star}>*</span> <br/><input onChange={this.nameHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.name]}`}} required value={this.state.formData.name}></input><br/></span>
@@ -255,13 +370,13 @@ class App extends React.Component {
               <span>Discipline: <span id={styles.star}>*</span> <br/><select onChange={this.disciplineHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.discipline]}`}} required value={this.state.formData.discipline}>
                 
                 <option value="n">Please Select</option>
-                <option value="sci">Science</option>
-                <option value="soc">Social Studies</option>
-                <option value="math">Math</option>
-                <option value="ela">Language Arts</option>
-                <option value="art">Fine Arts</option>
-                <option value="digart">Digital Arts</option>
-                <option value="pe">Physical Education</option>
+                <option value="Science">Science</option>
+                <option value="Social Studies">Social Studies</option>
+                <option value="Math">Math</option>
+                <option value="Language Arts">Language Arts</option>
+                <option value="Fine Arts">Fine Arts</option>
+                <option value="Digital Arts">Digital Arts</option>
+                <option value="Physical Education">Physical Education</option>
                 
               </select><br/></span>
               <span>Email: <span id={styles.star}>*</span> <br/><input onChange={this.emailHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.email]}`}} required value={this.state.formData.email}></input><br/></span>

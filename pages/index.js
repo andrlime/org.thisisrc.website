@@ -101,7 +101,7 @@ class App extends React.Component {
 
           <div className={styles.navlist} style={{display: this.state.menu ? "inline-block" : "none"}}>
             {nav.map((item, i) => (
-              <div className={item.active==0 ? styles.underline : styles.overline}>
+              <div key={i} className={item.active==0 ? styles.underline : styles.overline}>
                 
                 <a href={item.link}>{item.name}</a>
                 
@@ -118,6 +118,7 @@ class App extends React.Component {
           </div>
 
           <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
+
           <ReactTypingEffect text={words} cursorRenderer={cursor => <h1>{cursor}</h1>} eraseDelay="3000" speed="40" eraseSpeed="40" typingDelay="1000" cursor=" "
           displayTextRenderer={(text, i) => {
             return (
@@ -143,7 +144,7 @@ class App extends React.Component {
               ["http://d2yg8h2dgs5f44.cloudfront.net/pres3.jpeg", "50", "30"],
               ["http://d2yg8h2dgs5f44.cloudfront.net/lab.jpeg", "50", "30"],
               ["http://d2yg8h2dgs5f44.cloudfront.net/dhodh-models.jpeg", "50", "20"]].map((i, index) => (
-                <div className={styles.img__colorpreload} style={{backgroundImage: `url(${i[0]})`, width: `${i[1]}rem`, height: `${i[2]}rem`, marginBottom: "2rem", backgroundPosition: "center"}}/>
+                <div key={i} className={styles.img__colorpreload} style={{backgroundImage: `url(${i[0]})`, width: `${i[1]}rem`, height: `${i[2]}rem`, marginBottom: "2rem", backgroundPosition: "center"}}/>
               ))
               }
 
@@ -155,7 +156,7 @@ class App extends React.Component {
                 <p id={styles.tltext}>Timeline</p>
 
                 {dates.map((item, i)=> (
-                  <p><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
+                  <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
                 ))}
 
 
