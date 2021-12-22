@@ -195,7 +195,7 @@ class App extends React.Component {
         <div className={styles.wrapper}>
           <>
           <p>Please confirm your submission.</p>
-          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark.</p>
+          <p>You will NOT be able to change this information once you submit! Don't close this page until you see a green check mark. It will take a few seconds. Please wait.</p>
           </>
 
           <div className={styles.wrapper__text}>
