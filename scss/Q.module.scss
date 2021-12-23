@@ -11,8 +11,7 @@ $white: #FFF;
 @media screen and (min-width: 768px) {
     .earth {
         display: flex;
-        //width: 100%;
-
+        width: 100%;
 
         .main {
 
@@ -26,8 +25,7 @@ $white: #FFF;
                 top: 0;
                 align-items: center;
                 justify-content: space-between;
-                width: 100%;
-                min-width: 900px;
+                width: 100vw;
                 z-index: 5;
         
         
@@ -67,6 +65,7 @@ $white: #FFF;
             //transform: translateX(80%);
             position: fixed;
             right: 0;
+            width: fit-content;
         
             .menu {
                 z-index: 5;
@@ -174,6 +173,7 @@ $white: #FFF;
             padding: 2rem;
             display: flex;
             min-width: 1200px;
+            background-color: white;
         
             .about__img {
                 width: 100%;
@@ -670,7 +670,7 @@ $white: #FFF;
         
         
                 #logo {
-                    width: 8rem;
+                    width: 6rem;
                     transition: 500ms all;
                 }
             }
@@ -714,9 +714,9 @@ $white: #FFF;
                 width: fit-content;
                 span {
                     display: block;
-                    width: 8rem;
-                    height: 1rem;
-                    margin-bottom: 1rem;
+                    width: 5rem;
+                    height: 0.8rem;
+                    margin-bottom: 0.8rem;
                     position: relative;
                     transition: 300ms all;
                     background: $white;
@@ -750,9 +750,9 @@ $white: #FFF;
                 width: 100%;
                 span {
                     display: block;
-                    width: 8rem;
-                    height: 1rem;
-                    margin-bottom: 1rem;
+                    width: 5rem;
+                    height: 0.8rem;
+                    margin-bottom: 0.8rem;
                     position: relative;
                     transition: 300ms all;
                     background: $white;
@@ -813,6 +813,7 @@ $white: #FFF;
             display: flex;
             flex-direction: column;
             min-width: 1200px;
+            background-color: white;
         
             .about__img {
                 width: 100%;
