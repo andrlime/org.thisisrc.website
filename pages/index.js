@@ -6,9 +6,26 @@ import ReactTypingEffect from 'react-typing-effect';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false, videoModal: false});
+    this.state = ({menu: false, videoModal: false, logoSize: 5, opacity: 0.2});
     this.menuHandler = this.menuHandler.bind(this);
     this.modalHandler = this.modalHandler.bind(this);
+    this.setLogoSize = this.setLogoSize.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.setLogoSize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.setLogoSize);
+  }
+
+  setLogoSize(e) {
+    let y = (window.scrollY-400);
+    if(y <= 500 && y >= 0) this.setState({logoSize: 5-(y/200)});
+
+    let op = (window.scrollY-500)/100 + 0.2; //opacity
+    if(op > 0.2) this.setState({opacity: op});
   }
 
   modalHandler(e) {
@@ -31,6 +48,11 @@ class App extends React.Component {
   }
 
   render() {
+    let navjsx = (<div className={styles.nav} style={{backgroundColor: `rgba(165, 83, 176, ${this.state.opacity})`}}>
+    <a href="/"><img id={styles.logo} src="/this-logo.png" style={{width: `${this.state.logoSize}rem`}}/></a>
+    <p style={{fontSize: `${this.state.logoSize*0.7}rem`}}>THIS ISRC</p>
+    </div>)
+
     let nav = [
       {name: "School Registration", link: "/register", active: 0},
       {name: "Project Submissions", link: "/submit", active: 0},
@@ -110,9 +132,8 @@ class App extends React.Component {
         </div>
         
         <div className={styles.main}>
-          <div className={styles.nav}>
-            <a href="/"><img id={styles.logo} src="/this-logo.png"/></a>
-          </div>
+          
+          {navjsx}
 
           <div style={{backgroundImage: "url(https://cdn.thisisrc.org/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
 
