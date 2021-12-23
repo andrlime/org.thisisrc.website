@@ -48,12 +48,10 @@ class App extends React.Component {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     //todo: make the timeline more interactive
-
-    let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
     let words = ["Leadership", "Collaboration", "Innovation", "Wellbeing", "Integrity", "Respect"];
 
     return (
-      <div className={styles.earth}>
+      <div className={this.state.phone ? styles.mars : styles.earth}>
 
         <div className={styles.modalButton} onClick={this.modalHandler} style={{display: this.state.videoModal ? "none" : "block"}}>
           <div className={styles.wrapper}>
@@ -91,7 +89,7 @@ class App extends React.Component {
       
         <div className={styles.sidebar}>
 
-          <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
+          <div onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
 
             <span></span>
             <span></span>

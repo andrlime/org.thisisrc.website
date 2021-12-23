@@ -300,7 +300,6 @@ class App extends React.Component {
       {name: "Dates & Deadlines", link: "/timeline", active: 0}
     ];
 
-    let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
     let colors = ["#82318E", "#119911", "#FF2211"];
 
     return (
@@ -342,7 +341,7 @@ class App extends React.Component {
       
       <div className={styles.sidebar}>
 
-        <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
+        <div onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
 
           <span></span>
           <span></span>

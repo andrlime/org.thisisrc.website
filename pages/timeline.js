@@ -23,8 +23,6 @@ class App extends React.Component {
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 1}
     ];
-    
-    let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
 
     let dates = [
       {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
@@ -35,9 +33,10 @@ class App extends React.Component {
 
     return (
       <div className={styles.earth}>
+
       <div className={styles.sidebar}>
 
-        <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
+        <div onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
 
           <span></span>
           <span></span>
