@@ -136,11 +136,11 @@ class App extends React.Component {
 
             <div className={styles.photos}>
 
-              {[["https://cdn.thisisrc.org/pres1.jpeg", "50", "30"],
-              ["https://cdn.thisisrc.org/pres2.jpeg", "50", "30"],
-              ["https://cdn.thisisrc.org/pres3.jpeg", "50", "30"],
-              ["https://cdn.thisisrc.org/lab.jpeg", "50", "30"],
-              ["https://cdn.thisisrc.org/dhodh-models.jpeg", "50", "20"]].map((i, index) => (
+              {[["https://cdn.thisisrc.org/pres1.jpeg", "55", "33"],
+              ["https://cdn.thisisrc.org/pres2.jpeg", "55", "33"],
+              ["https://cdn.thisisrc.org/pres3.jpeg", "55", "33"],
+              ["https://cdn.thisisrc.org/lab.jpeg", "55", "33"],
+              ["https://cdn.thisisrc.org/dhodh-models.jpeg", "55", "22"]].map((i, index) => (
                 <div key={i} className={styles.img__colorpreload} style={{backgroundImage: `url(${i[0]})`, width: `${i[1]}rem`, height: `${i[2]}rem`, marginBottom: "2rem", backgroundPosition: "center"}}/>
               ))
               }
