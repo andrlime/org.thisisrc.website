@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
-import {isMobile} from 'react-device-detect';
 import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false, phone: isMobile,
+    this.state = ({menu: false, 
       formColors: {name: 0, contact: 0, position: 0, email: 0, verify: 0},
       formData: {name: "", contact: "", position: "", email: "", verify: ""},
       message: "",

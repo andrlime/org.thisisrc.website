@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
-import {isMobile} from 'react-device-detect';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false, phone: isMobile});
+    this.state = ({menu: false});
     this.menuHandler = this.menuHandler.bind(this);
   }
 

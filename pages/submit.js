@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
-import {isMobile} from 'react-device-detect';
 import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false, phone: isMobile,
+    this.state = ({menu: false, 
       formColors: {type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, schoolName: 0, code: 0},
       formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", schoolName: "", code: ""},
       message: "",
@@ -161,16 +160,11 @@ class App extends React.Component {
       colors.abstract = 2;
     } else {
       colors.abstract = 1;
-
       if(wc.length+1 > 250) {
         colors.abstract = 2;
       }
     }
-
     data.abstract = e.target.value;
-    //data.abstract = wc
-    //console.log(wc, wc.length+1);
-
     this.setState({formColors: colors, formData: data, wordcount: wc.length+1});
   }
 

@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
-import {isMobile} from 'react-device-detect';
 import ReactTypingEffect from 'react-typing-effect';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false, phone: isMobile, videoModal: false});
+    this.state = ({menu: false, videoModal: false});
     this.menuHandler = this.menuHandler.bind(this);
     this.modalHandler = this.modalHandler.bind(this);
   }
@@ -51,7 +50,7 @@ class App extends React.Component {
     let words = ["Leadership", "Collaboration", "Innovation", "Wellbeing", "Integrity", "Respect"];
 
     return (
-      <div className={this.state.phone ? styles.mars : styles.earth}>
+      <div className={styles.earth}>
 
         <div className={styles.modalButton} onClick={this.modalHandler} style={{display: this.state.videoModal ? "none" : "block"}}>
           <div className={styles.wrapper}>
