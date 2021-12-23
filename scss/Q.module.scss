@@ -5,9 +5,7 @@ $accent3: #EF97F9;
 $accent4: #FFBAFF;
 $black: #181818;
 $white: #FFF;
-//todo: add support for smaller screens
-//todo: add support for mobile devices
-//todo: add support to click a button on each menu to hide them -- this means the width of "center" needs to be increased. this can be in react state.
+
 @media screen and (min-width: 768px) {
     .earth {
         display: flex;
@@ -21,6 +19,7 @@ $white: #FFF;
                 //margin: 1.5rem;
                 padding: 0.8rem;
                 background-color: $accent1;
+                position: -webkit-sticky;
                 position: sticky;
                 top: 0;
                 align-items: center;
@@ -36,7 +35,7 @@ $white: #FFF;
             }
         
             .chead {
-                background-color: #A553B033;
+                background-color: hsla(293, 37%, 51%, 0.2);
                 padding-bottom: 2rem;
                 display: flex;
                 height: 100vh;
@@ -65,6 +64,7 @@ $white: #FFF;
             //transform: translateX(80%);
             position: fixed;
             right: 0;
+            width: -moz-fit-content;
             width: fit-content;
         
             .menu {
@@ -72,6 +72,7 @@ $white: #FFF;
                 padding: 0.2rem;
                 margin: auto;
                 transition: 500ms all;
+                width: -moz-fit-content;
                 width: fit-content;
                 span {
                     display: block;
@@ -145,24 +146,25 @@ $white: #FFF;
                     padding: 0.4em;
                     margin: 1rem;
                     margin-left: 0;
+                    width: -moz-fit-content;
                     width: fit-content;
                 }
         
                 .underline {
                     transform: translateY(-1rem) translateX(1rem);
-                    background-color: #18181800;
+                    background-color: hsla(0, 0%, 9%, 0);
                     transition: 300ms all;
                 }
         
                 .underline:hover {
-                    background-color: #FFBAFFAA;
+                    background-color: hsla(300, 100%, 86%, 0.667);
                     transition: 300ms all;
                     cursor: pointer;
                 }
         
                 .overline {
                     transform: translateY(-1rem) translateX(1rem);
-                    background-color: #FFBAFFAA;
+                    background-color: hsla(300, 100%, 86%, 0.667);
                     transition: 300ms all;
                     cursor: pointer;
                 }
@@ -325,7 +327,7 @@ $white: #FFF;
         }
         
         .footer {
-            background-color: #EF97F944;
+            background-color: hsla(294, 89%, 78%, 0.267);
             text-align: center;
             color: $primary;
             padding: 1rem;
@@ -365,7 +367,7 @@ $white: #FFF;
         
         .modal {
             z-index: 9;
-            background-color: #82318E77;
+            background-color: hsla(292, 49%, 37%, 0.467);
             border-radius: 2rem;
             padding: 1.5rem;
             color: $white;
@@ -392,7 +394,7 @@ $white: #FFF;
         }
         
         .modalBlack {
-            background-color: #00000088;
+            background-color: hsla(0, 0%, 0%, 0.533);
             z-index: 8;
             padding: 2rem;
             color: $white;
@@ -576,6 +578,7 @@ $white: #FFF;
                 font-weight: 800;
                 background-color: $accent4;
                 transition: 500ms all;
+                width: -moz-fit-content;
                 width: fit-content;
                 align-self: center;
             }
@@ -660,6 +663,7 @@ $white: #FFF;
                 flex-direction: row;
                 padding: 0.8rem;
                 background-color: $accent1;
+                position: -webkit-sticky;
                 position: sticky;
                 top: 0;
                 align-items: center;
@@ -676,7 +680,7 @@ $white: #FFF;
             }
         
             .chead {
-                background-color: #A553B033;
+                background-color: hsla(293, 37%, 51%, 0.2);
                 padding-bottom: 2rem;
                 display: flex;
                 height: 100vh;
@@ -711,6 +715,7 @@ $white: #FFF;
                 padding: 1rem;
                 margin: auto;
                 transition: 500ms all;
+                width: -moz-fit-content;
                 width: fit-content;
                 span {
                     display: block;
@@ -784,24 +789,25 @@ $white: #FFF;
                     padding: 0.4em;
                     margin: 1rem;
                     margin-left: 0;
+                    width: -moz-fit-content;
                     width: fit-content;
                 }
         
                 .underline {
                     transform: translateY(-1rem) translateX(1rem);
-                    background-color: #18181800;
+                    background-color: hsla(0, 0%, 9%, 0);
                     transition: 300ms all;
                 }
         
                 .underline:hover {
-                    background-color: #FFBAFFAA;
+                    background-color: hsla(300, 100%, 86%, 0.667);
                     transition: 300ms all;
                     cursor: pointer;
                 }
         
                 .overline {
                     transform: translateY(-1rem) translateX(1rem);
-                    background-color: #FFBAFFAA;
+                    background-color: hsla(300, 100%, 86%, 0.667);
                     transition: 300ms all;
                     cursor: pointer;
                 }
@@ -1007,7 +1013,7 @@ $white: #FFF;
         
         .modal {
             z-index: 9;
-            background-color: #82318E77;
+            background-color: hsla(292, 49%, 37%, 0.467);
             border-radius: 2rem;
             padding: 1.5rem;
             color: $white;
@@ -1034,7 +1040,7 @@ $white: #FFF;
         }
         
         .modalBlack {
-            background-color: #00000088;
+            background-color: hsla(0, 0%, 0%, 0.533);
             z-index: 8;
             padding: 2rem;
             color: $white;
@@ -1218,6 +1224,7 @@ $white: #FFF;
                 font-weight: 800;
                 background-color: $accent4;
                 transition: 500ms all;
+                width: -moz-fit-content;
                 width: fit-content;
                 align-self: center;
             }
