@@ -20,16 +20,9 @@
   "homepage": "https://github.com/andrewli06/IndependentStudyWebsite#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "mongodb": "^4.2.2",
     "next": "^12.0.7",
     "react": "^17.0.2",
-    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
-    "react-fade": "^1.1.1",
-    "react-router-dom": "^6.2.1",
     "react-typing-effect": "^2.0.5"
   }
 }
