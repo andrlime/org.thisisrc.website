@@ -23,13 +23,12 @@ class App extends React.Component {
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 0}
     ];
-    let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
 
     return (
       <div className={styles.earth}>
       <div className={styles.sidebar}>
 
-        <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
+        <div onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
 
           <span></span>
           <span></span>
@@ -55,12 +54,12 @@ class App extends React.Component {
         <div className={styles.mainContent}>
           
           <div style={{width: "60%"}}>
-            <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/this-bldg.jpeg)", width: "50rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
+            <div style={{backgroundImage: "url(https://cdn.thisisrc.org/this-bldg.jpeg)", width: "50rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
 
             <p className={styles.about__head}>What is the ISRC?</p>
             <p className={styles.about__text}>The <b>International Schools Research Colloquium (ISRC)</b> is a unique forum for high school students to showcase their academic prowess. Tsinghua International School invites seniors currently engaged in academic research at their schools, to this first-of-its-kind conference to share and celebrate your research journeys. The colloquium will include panel discussions, displays, student and teacher-led workshops and more.</p>
 
-            <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/core-values.jpeg)", width: "30rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
+            <div style={{backgroundImage: "url(https://cdn.thisisrc.org/core-values.jpeg)", width: "30rem", height: "30rem"}} id={styles.about__schoolimg} className={styles.img__colorpreload}></div>
 
             <p className={styles.about__head}>About Tsinghua International School</p>
             <p className={styles.about__text}><b>Tsinghua International School (THIS)</b>, founded in 2009, is affiliated to Tsinghua University. We are an integration of Chinese and Western education and culture combined with the Tsinghua spirit. Our mission is to foster creative critical thinkers who are rooted in China and prepared to lead in the global community.</p>

@@ -48,12 +48,10 @@ class App extends React.Component {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     //todo: make the timeline more interactive
-
-    let menuWidth = this.state.phone && this.state.menu ? "100vw" : (this.state.menu ? "25vw" : "");
     let words = ["Leadership", "Collaboration", "Innovation", "Wellbeing", "Integrity", "Respect"];
 
     return (
-      <div className={styles.earth}>
+      <div className={this.state.phone ? styles.mars : styles.earth}>
 
         <div className={styles.modalButton} onClick={this.modalHandler} style={{display: this.state.videoModal ? "none" : "block"}}>
           <div className={styles.wrapper}>
@@ -83,7 +81,7 @@ class App extends React.Component {
           <img className={styles.button} src="/cross.svg" width="3%" onClick={this.modalHandler}/>
 
           <video id="video" width="100%" height="100%" style={{backgroundColor: "black"}} controls>
-            <source src="http://d2yg8h2dgs5f44.cloudfront.net/video-comp.mp4"/>
+            <source src="https://cdn.thisisrc.org/video-comp.mp4"/>
             Your browser does not support the video tag.
           </video>
 
@@ -91,7 +89,7 @@ class App extends React.Component {
       
         <div className={styles.sidebar}>
 
-          <div style={{width: menuWidth}} onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
+          <div onClick={this.menuHandler} className={this.state.menu ? styles.menuactive : styles.menu}>
 
             <span></span>
             <span></span>
@@ -117,7 +115,7 @@ class App extends React.Component {
             <a href="/"><img id={styles.logo} src="/this-logo.png"/></a>
           </div>
 
-          <div style={{backgroundImage: "url(http://d2yg8h2dgs5f44.cloudfront.net/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
+          <div style={{backgroundImage: "url(https://cdn.thisisrc.org/cover-image.png)", backgroundPosition: "center bottom", backgroundRepeat: "no-repeat", backgroundSize: "cover", top: "0", zIndex: "-100000"}} className={styles.chead}> 
 
           <ReactTypingEffect text={words} cursorRenderer={cursor => <h1>{cursor}</h1>} eraseDelay="3000" speed="40" eraseSpeed="40" typingDelay="1000" cursor=" "
           displayTextRenderer={(text, i) => {
@@ -139,11 +137,11 @@ class App extends React.Component {
 
             <div className={styles.photos}>
 
-              {[["http://d2yg8h2dgs5f44.cloudfront.net/pres1.jpeg", "50", "30"],
-              ["http://d2yg8h2dgs5f44.cloudfront.net/pres2.jpeg", "50", "30"],
-              ["http://d2yg8h2dgs5f44.cloudfront.net/pres3.jpeg", "50", "30"],
-              ["http://d2yg8h2dgs5f44.cloudfront.net/lab.jpeg", "50", "30"],
-              ["http://d2yg8h2dgs5f44.cloudfront.net/dhodh-models.jpeg", "50", "20"]].map((i, index) => (
+              {[["https://cdn.thisisrc.org/pres1.jpeg", "50", "30"],
+              ["https://cdn.thisisrc.org/pres2.jpeg", "50", "30"],
+              ["https://cdn.thisisrc.org/pres3.jpeg", "50", "30"],
+              ["https://cdn.thisisrc.org/lab.jpeg", "50", "30"],
+              ["https://cdn.thisisrc.org/dhodh-models.jpeg", "50", "20"]].map((i, index) => (
                 <div key={i} className={styles.img__colorpreload} style={{backgroundImage: `url(${i[0]})`, width: `${i[1]}rem`, height: `${i[2]}rem`, marginBottom: "2rem", backgroundPosition: "center"}}/>
               ))
               }
