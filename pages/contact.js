@@ -5,8 +5,25 @@ import React from 'react';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({menu: false});
+    this.state = ({menu: false, logoSize: 3, opacity: 1});
     this.menuHandler = this.menuHandler.bind(this);
+    this.setLogoSize = this.setLogoSize.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.setLogoSize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.setLogoSize);
+  }
+
+  setLogoSize(e) {
+    let y = (window.scrollY-400);
+    if(y <= 500 && y >= 0) this.setState({logoSize: 3-(y/200)});
+
+    let op = (window.scrollY-500)/100 + 1; //opacity
+    if(op > 1) this.setState({opacity: op});
   }
 
   menuHandler(e) {
@@ -15,6 +32,11 @@ class App extends React.Component {
   }
 
   render() {
+    let navjsx = (<div className={styles.nav} style={{backgroundColor: `rgba(165, 83, 176, ${this.state.opacity})`}}>
+    <a href="/"><img id={styles.logo} src="/this-logo.png" style={{width: `${this.state.logoSize}rem`}}/></a>
+    <p style={{fontSize: `${this.state.logoSize*0.7}rem`}}>THIS ISRC</p>
+    </div>)
+
     let nav = [
       {name: "School Registration", link: "/register", active: 0},
       {name: "Project Submissions", link: "/submit", active: 0},
@@ -46,9 +68,7 @@ class App extends React.Component {
       </div>
       
       <div className={styles.main}>
-        <div className={styles.nav}>
-          <a href="/"><img id={styles.logo} src="/this-logo.png"/></a>
-        </div>
+        {navjsx}
 
         <div className={styles.mainContent}>
           
