@@ -39,9 +39,6 @@ class App extends React.Component {
   setLogoSize(e) {
     let y = (window.scrollY-50)/2;
     if(y <= 300 && y >= 0) this.setState({logoSize: 3-(y/200)});
-
-    let op = (window.scrollY-500)/100 + 1; //opacity
-    if(op > 1) this.setState({opacity: op});
   }
 
   submitHandler(e) {
