@@ -24,6 +24,7 @@ class App extends React.Component {
 
     let op = (window.scrollY-100)/100 + 0.5; //opacity
     if(op > 0.5) this.setState({opacity: op});
+    else this.setState({opacity: 0.5});
   }
 
   menuHandler(e) {

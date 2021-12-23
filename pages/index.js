@@ -26,6 +26,7 @@ class App extends React.Component {
 
     let op = (window.scrollY-500)/100 + 0.2; //opacity
     if(op > 0.2) this.setState({opacity: op});
+    else this.setState({opacity: 0.2});
   }
 
   modalHandler(e) {
