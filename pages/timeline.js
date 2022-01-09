@@ -43,8 +43,11 @@ class App extends React.Component {
     ];
 
     let dates = [
-      {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
-      {date: new Date('2022-05-01T00:00:00'), desc: "Research Conference", longdesc: ""}
+      {date: new Date('2022-02-28T00:00:00'), desc: "Early Bird Registration Deadline"},
+      {date: new Date('2022-03-20T00:00:00'), desc: "Registration Deadline"},
+      {date: new Date('2022-04-08T00:00:00'), desc: "Submission Deadline"},
+      {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"},
+      
     ];
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -78,17 +81,16 @@ class App extends React.Component {
         <div className={styles.mainContent}>
           
           <div className={styles.tlbig} style={{width: "80%"}}>
-            <p>Timeline</p>
+            <p>Dates and Deadlines</p>
 
             {dates.map((item, i)=> (
-              <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
+              <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}</p>
             ))}
 
-            <p>More updates will come soon! Check this page often!</p>
             <br/><br/><br/><br/><br/><br/>
             <br/><br/><br/><br/><br/><br/>
             <br/><br/><br/><br/><br/><br/>
-            <br/><br/><br/><br/><br/>
+            <br/><br/>
           </div>
 
         </div>

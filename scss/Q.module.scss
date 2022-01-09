@@ -1306,3 +1306,49 @@ $white: #FFF;
     }
 
 }
+//by the way if you're debugging this, good luck!!
+
+#addButton {
+    background-color: #FFF;
+    border: 1px solid $primary;
+}
+
+#addButton:hover {
+    background-color: $primary;
+    color: $white
+}
+
+#tab1, #tab2, #tab3 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#tab1 {
+    border-radius: 1rem 0 0 1rem;
+}
+
+#tab2 {
+    border-radius: 0;
+}
+
+#tab3 {
+    border-radius: 0 1rem 1rem 0;
+}
+
+#tab1_fill {
+    border-radius: 1rem 0 0 1rem;
+    background-color: #82318E;
+    color: #FFF;
+}
+
+#tab2_fill {
+    background-color: #82318E;
+    color: #FFF;
+    border-radius: 0;
+}
+
+#tab3_fill {
+    background-color: #82318E;
+    color: #FFF;
+    border-radius: 0 1rem 1rem 0;
+}

@@ -152,7 +152,7 @@ class App extends React.Component {
     let data = this.state.formData;
     data.email = e.target.value;
 
-    let rx = /(\w+[@]\w+([.]\w+)+)/g; //tests if it's an email
+    let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
     if(e.target.value.match(rx) == e.target.value) {
       colors.email = 1;
     } else {
@@ -169,7 +169,7 @@ class App extends React.Component {
     let data = this.state.formData;
     data.verify = e.target.value;
 
-    let rx = /(\w+[@]\w+([.]\w+)+)/g; //tests if it's an email
+    let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
     if(e.target.value == this.state.formData.email && e.target.value != "" && this.state.formData.email.match(rx) == e.target.value) {
       colors.verify = 1;
     } else {
