@@ -7,15 +7,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({menu: false, 
-      formColors: {type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, schoolName: 0, code: 0},
-      formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", schoolName: "", code: ""},
+      formColors: {type: 0, name: 0, title: 0, abstract: 0, discipline: 0, email: 0, verify: 0, schoolName: 0, code: 0, disciplineTwo: 0},
+      formData: {type: "", name: "", title: "", abstract: "", discipline: "", email: "", verify: "", schoolName: "", code: "", disciplineTwo: ""},
       message: "",
       wordcount: 0,
-      boxType: "Abstract",
       showConfirmationModal: false,
       submitModal: false,
       schoolName: "",
-      apiON: false, logoSize: 3, opacity: 1
+      apiON: false, logoSize: 3, opacity: 1,
+      hasSecondDiscipline: false,
+      activeType: 0,
+      showDescription: false,
+      description: ""
     });
     this.menuHandler = this.menuHandler.bind(this);
     this.nameHandler = this.nameHandler.bind(this);
@@ -30,11 +33,56 @@ class App extends React.Component {
     this.typeHandler = this.typeHandler.bind(this);
     this.snhandler = this.snhandler.bind(this);//school name
 
+    this.disciplineTwoHandler = this.disciplineTwoHandler.bind(this);
+    this.addDisciplineHandler = this.addDisciplineHandler.bind(this);
+
     this.modalHandler = this.modalHandler.bind(this);//confirm screen
     this.post = this.post.bind(this); // post to database
     this.submitModalHandler = this.submitModalHandler.bind(this);
 
     this.setLogoSize = this.setLogoSize.bind(this);
+    this.setDesc = this.setDesc.bind(this);
+    this.clearDesc = this.clearDesc.bind(this);
+  }
+
+  setDesc(e) {
+    let descriptions = [
+      (<p>A <b>display</b> can include a display of your research, a poster, a prototype, your art, etc.</p>),
+      (<p>A <b>panel</b> can include you moderating a discussion, an oral presentation, a performance (e.g., a play).</p>),
+      (<p>A <b>workshop</b> can look like you demonstrating something you created, teaching a skill, etc.</p>)
+    ];
+
+    let dN = e.target.value;
+
+    this.setState({showDescription: true, description: descriptions[dN]});
+  }
+
+  clearDesc(e) {
+    if(this.activeType == 0) {
+      this.setState({showDescription: false, description: ""});
+    }
+  }
+
+  disciplineTwoHandler(e) {
+    let colors = this.state.formColors;
+    let data = this.state.formData;
+    if(e.target.value == "" || e.target.value == "n") {
+      colors.disciplineTwo = 2;
+    } else {
+      colors.disciplineTwo = 1;
+    }
+    data.disciplineTwo = e.target.value;
+    this.setState({formColors: colors, formData: data});
+  }
+
+  addDisciplineHandler(e) {
+    if(this.state.hasSecondDiscipline) {
+      //do nothing
+      this.setState({hasSecondDiscipline: false});
+    } else {
+      //add a second one
+      this.setState({hasSecondDiscipline: true});
+    }
   }
 
   componentDidMount() {
@@ -70,11 +118,33 @@ class App extends React.Component {
     } else {
       colors.type = 1;
     }
-    data.type = e.target.value;
+    data.type = e.target.innerHTML;
+    let active;
 
-    let box = data.type == "Workshop" ? "Description" : "Abstract"
+    //find active type
+    switch(e.target.innerHTML) {
+      case "Display":
+        active = 1;
+        break;
+      case "Panel":
+        active = 2;
+        break;
+      case "Workshop":
+        active = 3;
+        break;
+      default:
+        active = 0;
+    }
 
-    this.setState({formColors: colors, formData: data, boxType: box});
+    let descriptions = [
+      (<p>A <b>display</b> can include a display of your research, a poster, a prototype, your art, etc.</p>),
+      (<p>A <b>panel</b> can include you moderating a discussion, an oral presentation, a performance (e.g., a play).</p>),
+      (<p>A <b>workshop</b> can look like you demonstrating something you created, teaching a skill, etc.</p>)
+    ];
+
+    let dN = e.target.value;
+
+    this.setState({formColors: colors, formData: data, activeType: active, showDescription: true, description: descriptions[dN]});
   }
 
   submitHandler(e) {
@@ -200,7 +270,7 @@ class App extends React.Component {
     let data = this.state.formData;
     data.email = e.target.value;
 
-    let rx = /(\w+[@]\w+([.]\w+)+)/g; //tests if it's an email
+    let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
     if(e.target.value.match(rx) == e.target.value) {
       colors.email = 1;
     } else {
@@ -217,7 +287,7 @@ class App extends React.Component {
     let data = this.state.formData;
     data.verify = e.target.value;
 
-    let rx = /(\w+[@]\w+([.]\w+)+)/g; //tests if it's an email
+    let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
     if(e.target.value == this.state.formData.email && e.target.value != "" && this.state.formData.email.match(rx) == e.target.value) {
       colors.verify = 1;
     } else {
@@ -274,7 +344,7 @@ class App extends React.Component {
             name: this.state.formData.name,
             title: this.state.formData.title,
             abstract: this.state.formData.abstract,
-            discipline: this.state.formData.abstract,
+            discipline: this.state.hasSecondDiscipline ? [this.state.formData.discipline, this.state.formData.disciplineTwo] : this.state.formData.discipline,
             email: this.state.formData.email,
             school: this.state.schoolName
           };
@@ -330,10 +400,10 @@ class App extends React.Component {
           <div className={styles.wrapper__text}>
           <p>Name: <span>{this.state.formData.name}</span></p>
           <p>School: <span>{(this.state.schoolName!="...") ? this.state.schoolName : "You entered an invalid code."}</span></p>
-          <p>Title of Submission: <span>{this.state.formData.title}</span></p>
+          <p>Title: <span>{this.state.formData.title}</span></p>
           <p>Type of Submission: <span>{this.state.formData.type}</span></p>
-          <p>Discipline: <span>{this.state.formData.discipline}</span></p>
-          <p>Abstract: <span>{this.state.formData.abstract}</span></p>
+          <p>Discipline(s): <span>{this.state.formData.discipline}{this.state.hasSecondDiscipline ? ` & ${this.state.formData.disciplineTwo}` : ""}</span></p>
+          <p>Description: <span>{this.state.formData.abstract}</span></p>
           <p>Email: <span>{this.state.formData.email}</span></p>
           </div>
           
@@ -382,21 +452,22 @@ class App extends React.Component {
               <p id={styles.formhead}>Project Submission</p>
               <p style={{color: "#FF2211"}}>{this.state.message}</p>
 
-              <span>Type of Submission: <span id={styles.star}>*</span> <br/><select onChange={this.typeHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.type]}`}} required value={this.state.formData.type}>
-                
-                <option value="n">Please Select</option>
-                <option value="Poster">Poster Submission</option>
-                <option value="Panel">Panel Submission</option>
-                <option value="Workshop">Workshop Application</option>
+              <span>Type of Submission: <span id={styles.star}>*</span> <br/>
+              <button onMouseEnter={this.setDesc} onMouseLeave={this.clearDesc} value={0} onClick={this.typeHandler} className={styles.tabButton} id={this.state.activeType == 1 ? styles.tab1_fill : styles.tab1}>Display</button>
+              <button onMouseEnter={this.setDesc} onMouseLeave={this.clearDesc} value={1} onClick={this.typeHandler} className={styles.tabButton} id={this.state.activeType == 2 ? styles.tab2_fill : styles.tab2}>Panel</button>
+              <button onMouseEnter={this.setDesc} onMouseLeave={this.clearDesc} value={2} onClick={this.typeHandler} className={styles.tabButton} id={this.state.activeType == 3 ? styles.tab3_fill : styles.tab3}>Workshop</button>
 
-              </select><br/></span>
+              <br/></span>
+
+              <div style={{display: this.state.showDescription ? "block" : "none", backgroundColor: "#EDEDED", padding: "0.5rem", borderRadius: "1rem", width: "fit-content", height: "fit-content", marginBottom: "1rem", transition: "500ms all ease-in-out"}}>{this.state.description}</div>
+              
               <span>Your Name: <span id={styles.star}>*</span> <br/><input onChange={this.nameHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.name]}`}} required value={this.state.formData.name}></input><br/></span>
-              <span>Your Project Title: <span id={styles.star}>*</span> <br/><input onChange={this.titleHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.title]}`}} required value={this.state.formData.title}></input><br/></span>
-              <span>{this.state.boxType}: <span id={styles.star}>*</span> <br/><textarea onChange={this.abstractHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.abstract]}`}} required value={this.state.formData.abstract}></textarea>
+              <span>Title: <span id={styles.star}>*</span> <br/><input onChange={this.titleHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.title]}`}} required value={this.state.formData.title}></input><br/></span>
+              <span>Description: <span id={styles.star}>*</span> <br/><textarea onChange={this.abstractHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.abstract]}`}} required value={this.state.formData.abstract}></textarea>
               <span id={styles.wcword} style={{color: this.state.wordcount>250 ? colors[2] : colors[0]}}>{this.state.wordcount}/250</span>
               
               <br/></span>
-              <span>Discipline: <span id={styles.star}>*</span> <br/><select onChange={this.disciplineHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.discipline]}`}} required value={this.state.formData.discipline}>
+              <span>{this.state.hasSecondDiscipline ? "First " : ""}Discipline: <span id={styles.star}>*</span> <br/><select onChange={this.disciplineHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.discipline]}`}} required value={this.state.formData.discipline}>
                 
                 <option value="n">Please Select</option>
                 <option value="Science">Science</option>
@@ -407,7 +478,21 @@ class App extends React.Component {
                 <option value="Digital Arts">Digital Arts</option>
                 <option value="Physical Education">Physical Education</option>
                 
-              </select><br/></span>
+              </select><button id={styles.addButton} style={{borderRadius: "10rem", padding: "0.5rem", lineHeight: "0.5"}} onClick={this.addDisciplineHandler}>{this.state.hasSecondDiscipline ? "–" : "+"}</button><br/></span>
+
+              {this.state.hasSecondDiscipline ? (<span>Second Discipline: <span id={styles.star}>*</span> <br/><select onChange={this.disciplineTwoHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.disciplineTwo]}`}} required value={this.state.formData.disciplineTwo}>
+                
+                <option value="n">Please Select</option>
+                <option value="Science">Science</option>
+                <option value="Social Studies">Social Studies</option>
+                <option value="Math">Math</option>
+                <option value="Language Arts">Language Arts</option>
+                <option value="Fine Arts">Fine Arts</option>
+                <option value="Digital Arts">Digital Arts</option>
+                <option value="Physical Education">Physical Education</option>
+                
+              </select><br/></span>) : ""}
+
               <span>Email: <span id={styles.star}>*</span> <br/><input onChange={this.emailHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.email]}`}} required value={this.state.formData.email}></input><br/></span>
               <span>Verify Email: <span id={styles.star}>*</span> <br/><input onChange={this.verifyHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.verify]}`}} required value={this.state.formData.verify}></input><br/></span>
               <span>School Code (case sensitive!): <span id={styles.star}>*</span> <br/><input onChange={this.codeHandler} style={{width: "250px", border: `0.5px solid ${colors[this.state.formColors.code]}`}} required value={this.state.formData.code}></input><br/></span>
