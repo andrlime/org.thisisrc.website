@@ -279,7 +279,9 @@ class App extends React.Component {
             <p style={{width: "50%"}}>You will receive a unique school code upon verification of information submitted and confirmation of payment receipt. Students will use this code to submit projects.</p>
             
             <p>Payment Instruction: wire transfer [amount] to the following account:</p>
-            <span>[account number]</span> 
+            <span><b>单位名称</b>: 北京市海淀区清华创新教育培训中心</span><br/>
+            <span><b>帐号</b>: 0109035240012011111556</span><br/>
+            <span>北京银行清华大学支行</span> 
             <p>Please include a payment memo: “School Name – ISRC payment"</p>
 
             <button onClick={this.submitHandler}>Register</button>
