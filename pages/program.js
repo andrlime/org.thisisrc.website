@@ -39,19 +39,11 @@ class App extends React.Component {
       {name: "Project Submissions", link: "/submit", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 0},
-      {name: "Dates & Deadlines", link: "/timeline", active: 1},
-      {name: "Conference Schedule", link: "/program", active: 0}
+      {name: "Dates & Deadlines", link: "/timeline", active: 0},
+      {name: "Conference Schedule", link: "/program", active: 1}
     ];
 
-    let dates = [
-      {date: new Date('2022-03-20T00:00:00'), desc: "Early Bird Registration Deadline"},
-      {date: new Date('2022-04-08T00:00:00'), desc: "Registration Deadline"},
-      {date: new Date('2022-04-28T00:00:00'), desc: "Submission Deadline"},
-      {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"},
-      
-    ];
-
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let dates = [{"date":"8:00-8:30","desc":"Registration"},{"date":"8:30-8:50","desc":"Opening Ceremony - Keynote Speech"},{"date":"9:00-9:55","desc":"Panel 1, Panel 2, Performance 1"},{"date":"10:00-10:45","desc":"Interactive Session 1"},{"date":"10:50-11:00","desc":"Break"},{"date":"11:00-11:55","desc":"AM Workshop Sessions 1 & 2"},{"date":"12:00-13:00","desc":"Lunch"},{"date":"13:05-13:55","desc":"PM Workshop Sessions 1 & 2"},{"date":"13:55-14:05","desc":"Break"},{"date":"14:05-14:55","desc":"Panel 3, Panel 4, Performance 2"},{"date":"15:00-15:45","desc":"Interactitive Session 2"},{"date":"15:50-16:16","desc":"Closing Ceremony"}];
 
     return (
       <div className={styles.earth}>
@@ -82,10 +74,10 @@ class App extends React.Component {
         <div className={styles.mainContent}>
           
           <div className={styles.tlbig} style={{width: "80%"}}>
-            <p>Dates and Deadlines</p>
+            <p>Conference Program</p>
 
             {dates.map((item, i)=> (
-              <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}</p>
+              <p key={i}><span>{item.date}</span>{item.desc}</p>
             ))}
 
           </div>
