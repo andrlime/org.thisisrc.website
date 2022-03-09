@@ -39,7 +39,8 @@ class App extends React.Component {
       {name: "Project Submissions", link: "/submit", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 1},
-      {name: "Dates & Deadlines", link: "/timeline", active: 0}
+      {name: "Dates & Deadlines", link: "/timeline", active: 0},
+      {name: "Conference Schedule", link: "/program", active: 0}
     ];
 
     return (

@@ -200,7 +200,8 @@ class App extends React.Component {
       {name: "Project Submissions", link: "/submit", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 0},
-      {name: "Dates & Deadlines", link: "/timeline", active: 0}
+      {name: "Dates & Deadlines", link: "/timeline", active: 0},
+      {name: "Conference Schedule", link: "/program", active: 0}
     ];
 
     let colors = ["#82318E", "#119911", "#FF2211"];
@@ -278,12 +279,9 @@ class App extends React.Component {
 
             <p style={{width: "50%"}}>You will receive a unique school code upon verification of information submitted and confirmation of payment receipt. Students will use this code to submit projects.</p>
             
-            <p>Payment Instructions: wire transfer {(Date.now() < 1646092800800) ? "¥450" : "¥650"}* to the following account:</p>
-            <span><b>单位名称</b>: 北京市海淀区清华创新教育培训中心</span><br/>
-            <span><b>帐号</b>: 0109035240012011111556</span><br/>
-            <span>北京银行清华大学支行</span> 
+            <p>Payment Instruction: wire transfer [amount] to the following account:</p>
+            <span>[account number]</span> 
             <p>Please include a payment memo: “School Name – ISRC payment"</p>
-            <span>*450 is the early bird price, which applies to registration before February 28th. 650 is the normal registration price, which applies to all other registrations.</span><br/><br/>
 
             <button onClick={this.submitHandler}>Register</button>
           </div>
