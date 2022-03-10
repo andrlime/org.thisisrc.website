@@ -35,8 +35,8 @@ class App extends React.Component {
     </div>)
 
     let nav = [
-      {name: "School Registration", link: "/register", active: 0},
-      {name: "Project Submissions", link: "/submit", active: 0},
+      {name: "School Registration", link: "/register/school", active: 0},
+      {name: "Project Submissions", link: "/register/student", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 1},
       {name: "Dates & Deadlines", link: "/timeline", active: 0},

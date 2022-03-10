@@ -35,8 +35,8 @@ class App extends React.Component {
     </div>)
 
     let nav = [
-      {name: "School Registration", link: "/register", active: 0},
-      {name: "Project Submissions", link: "/submit", active: 0},
+      {name: "School Registration", link: "/register/school", active: 0},
+      {name: "Project Submissions", link: "/register/student", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 1},
@@ -48,7 +48,6 @@ class App extends React.Component {
       {date: new Date('2022-04-08T00:00:00'), desc: "Registration Deadline"},
       {date: new Date('2022-04-28T00:00:00'), desc: "Submission Deadline"},
       {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"},
-      
     ];
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
