@@ -55,8 +55,8 @@ class App extends React.Component {
     </div>)
 
     let nav = [
-      {name: "School Registration", link: "/register", active: 0},
-      {name: "Project Submissions", link: "/submit", active: 0},
+      {name: "School Registration", link: "/register/school", active: 0},
+      {name: "Project Submissions", link: "/register/student", active: 0},
       {name: "About Us", link: "/about", active: 0},
       {name: "Contact Us", link: "/contact", active: 0},
       {name: "Dates & Deadlines", link: "/timeline", active: 0},
@@ -64,8 +64,10 @@ class App extends React.Component {
     ];
 
     let dates = [
-      {date: new Date('2022-04-01T00:00:00'), desc: "Abstracts Due", longdesc: ""},
-      {date: new Date('2022-05-01T00:00:00'), desc: "Research Conference", longdesc: ""}
+      {date: new Date('2022-03-20T00:00:00'), desc: "Early Bird Registration Deadline"},
+      {date: new Date('2022-04-08T00:00:00'), desc: "Registration Deadline"},
+      {date: new Date('2022-04-28T00:00:00'), desc: "Submission Deadline"},
+      {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"},
     ];
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -177,8 +179,22 @@ class App extends React.Component {
 
                 {dates.map((item, i)=> (
                   <p key={i}><span>{months[item.date.getMonth()]} {item.date.getDate()}</span>{item.desc}{item.longdesc}</p>
-                ))}
+                ))}<br/>
 
+
+              </div>
+            </div>
+
+            <div className={styles.timeline}>
+              <div id={styles.box}>
+
+                <p id={styles.tltext}>Registration Instructions</p>
+                <ol>
+                  <li>Register your school <a href="/register/school">here</a>. <b>Each registration fee includes 10 student submissions. If you wish to register more students, please email us at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a></b></li>
+                  <li>Remember to pay! Payment information can be found on the <a href="/register/school">school registration page</a>. The early-bird fee is ¥450 and the non early-bird fee is ¥650.</li>
+                  <li>When you register, you are assigned a 6 digit school code. Write this down and give it to your students to use when they register.</li>
+                  <li>Have your students register at <a href="register/student">this link</a>. When they register, make sure they use the right school code.</li>
+                </ol><br/>
 
               </div>
             </div>
