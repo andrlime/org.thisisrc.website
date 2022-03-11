@@ -139,7 +139,6 @@ const StudentRegistration = () => {
                 axios
                 .get(`https://ribbon.thisisrc.org/schools/${event.target.value}`)
                 .then((res) => {
-                  console.log(res);
                   if(res.data != null) {
                     setStudentSchool(res.data.name);
                     setIsValidSchool(true);
@@ -168,7 +167,6 @@ const StudentRegistration = () => {
                 setShowDesc(true);
               }} value={0} onClick={(event) => {
                 setActiveType(1);
-                console.log(activeType);
               }}>Display</button><span>&nbsp;&nbsp;&nbsp;</span>
 
               <button onMouseEnter={(event) => {
@@ -176,7 +174,6 @@ const StudentRegistration = () => {
                 setShowDesc(true);
               }} value={1} onClick={(event) => {
                 setActiveType(2);
-                console.log(activeType);
               }}>Panel</button><span>&nbsp;&nbsp;&nbsp;</span>
 
               <button onMouseEnter={(event) => {
@@ -184,7 +181,6 @@ const StudentRegistration = () => {
                 setShowDesc(true);
               }} value={2} onClick={(event) => {
                 setActiveType(3);
-                console.log(activeType);
               }}>Workshop</button>
 
               <br/><br/></span>
@@ -250,10 +246,8 @@ const StudentRegistration = () => {
               axios
                 .post("https://ribbon.thisisrc.org/students/add", student)
                 .then(result => {
-                  console.log(result);
                   setShowModal(true);
                 }).catch(err => {
-                  console.log(err);
                   setShowModal(false);
                   setMessage("There was an error. Please try again. If this continues, please send us an email with your registration info.");
                   document.body.classList.remove("stopscroll");

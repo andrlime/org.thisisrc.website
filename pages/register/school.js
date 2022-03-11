@@ -132,11 +132,9 @@ const SchoolRegistration = () => {
               axios
                 .post("https://ribbon.thisisrc.org/schools/add", school)
                 .then(result => {
-                  console.log(result);
                   setShowModal(true);
                   setSchoolCode(result.data.code);
                 }).catch(err => {
-                  console.log(err);
                   setShowModal(false);
                   setMessage("There was an error. Please try again. If this persists, please send us an email with your registration info.");
                   document.body.classList.remove("stopscroll");
