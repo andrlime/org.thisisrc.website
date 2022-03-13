@@ -79,7 +79,7 @@ const StudentRegistration = () => {
   return (
     <div className={styles.earth}>
       <Head>
-        <title>THIS ISRC 2022 - Registration</title>
+        <title>THIS ISRC 2022 - Project Submission</title>
         <link rel="icon" href="/logo-spartan.svg" />
       </Head>
 
