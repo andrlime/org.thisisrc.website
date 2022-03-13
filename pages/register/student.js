@@ -56,9 +56,9 @@ const StudentRegistration = () => {
   const [projectDisciplineOne, setProjectDisciplineOne] = useState("");
   const [showDisTwo, setShowDisTwo] = useState(false);
   const [projectDisciplineTwo, setProjectDisciplineTwo] = useState("");
+  const [pronouns, setPronouns] = useState("");
 
   //type
-  const [activeType, setActiveType] = useState(0);
   const [description, setDesc] = useState("");
   const [showDesc, setShowDesc] = useState(false);
 
@@ -133,6 +133,13 @@ const StudentRegistration = () => {
               }
             }}></input></span><br/>
 
+            <span>Preferred Pronouns: <select style={{border: `2px solid ${colors[0]}`}} value={pronouns} onChange={(event) => (setPronouns(event.target.value))}>
+              <option>he/him/his</option>  
+              <option>she/her/hers</option> 
+              <option>they/them/theirs</option>
+              <option>other</option>
+            </select></span><br/>
+
             <span>School Code (case sensitive!): <input style={{border: `2px solid ${colors[0]}`}} value={studentSchoolCode} onChange={(event) => {
               setStudentSchoolCode(event.target.value);
               if(event.target.value.length == 7) {
@@ -165,23 +172,17 @@ const StudentRegistration = () => {
               <button onMouseEnter={(event) => {
                 setDesc(descriptions[event.target.value]);
                 setShowDesc(true);
-              }} value={0} onClick={(event) => {
-                setActiveType(1);
-              }}>Display</button><span>&nbsp;&nbsp;&nbsp;</span>
+              }} value={0}>Display</button><span>&nbsp;&nbsp;&nbsp;</span>
 
               <button onMouseEnter={(event) => {
                 setDesc(descriptions[event.target.value]);
                 setShowDesc(true);
-              }} value={1} onClick={(event) => {
-                setActiveType(2);
-              }}>Panel</button><span>&nbsp;&nbsp;&nbsp;</span>
+              }} value={1}>Panel</button><span>&nbsp;&nbsp;&nbsp;</span>
 
               <button onMouseEnter={(event) => {
                 setDesc(descriptions[event.target.value]);
                 setShowDesc(true);
-              }} value={2} onClick={(event) => {
-                setActiveType(3);
-              }}>Workshop</button>
+              }} value={2}>Workshop</button>
 
               <br/><br/></span>
 
@@ -227,7 +228,7 @@ const StudentRegistration = () => {
             <button onClick={() => {
             //submit the form
             //test if all requirements are met
-            if(studentName && studentEmail && studentSchool && isValidSchool && projectTitle &&
+            if(pronouns && studentName && studentEmail && studentSchool && isValidSchool && projectTitle &&
               projectType && projectDescription && projectDisciplineOne && isValidEmail && (projectDescriptionLength < 250) && (showDisTwo==projectDisciplineTwo)
             ) {
 
@@ -238,7 +239,8 @@ const StudentRegistration = () => {
                 project_type: projectType,
                 project_title: projectTitle,
                 project_description: projectDescription,
-                school: studentSchoolCode
+                school: studentSchoolCode,
+                pronouns: pronouns
               };
 
               

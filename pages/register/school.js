@@ -43,8 +43,8 @@ const SchoolRegistration = () => {
   const [contactPosition, setContactPosition] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [schoolCode, setSchoolCode] = useState("");
   const [message, setMessage] = useState("");
+  const [pronouns, setPronouns] = useState("");
   
   return (
     <div className={styles.earth}>
@@ -105,7 +105,15 @@ const SchoolRegistration = () => {
                 setIsValidEmail(false);
               }
             }}></input></span><br/>
-            <span>Contact Position: <input style={{border: `2px solid ${colors[0]}`}} value={contactPosition} onChange={(event) => (setContactPosition(event.target.value))}></input></span><br/>
+            
+            <span>Preferred Pronouns: <select style={{border: `2px solid ${colors[0]}`}} value={pronouns} onChange={(event) => (setPronouns(event.target.value))}>
+              <option>he/him/his</option>  
+              <option>she/her/hers</option> 
+              <option>they/them/theirs</option>
+              <option>other</option>
+            </select></span><br/>
+
+            <span>Position: <input style={{border: `2px solid ${colors[0]}`}} value={contactPosition} onChange={(event) => (setContactPosition(event.target.value))}></input></span><br/>
 
             <p style={{width: "50%"}}>You will receive a unique school code upon verification of information submitted and confirmation of payment receipt. Students will use this code to submit projects.</p>
 
@@ -119,19 +127,19 @@ const SchoolRegistration = () => {
             <button onClick={() => {
             //submit the form
             //test if all requirements are met
-            if(schoolName && contactName && contactEmail && contactPosition && isValidEmail) {
+            if(schoolName && contactName && contactEmail && contactPosition && isValidEmail && pronouns) {
               let school = {
                 name: schoolName,
                 contact_name: contactName,
                 contact_position: contactPosition,
-                contact_email: contactEmail
+                contact_email: contactEmail,
+                pronouns: pronouns
               };
             
               axios
                 .post("https://ribbon.thisisrc.org/schools/add", school)
                 .then(result => {
                   setShowModal(true);
-                  setSchoolCode(result.data.code);
                 }).catch(err => {
                   setShowModal(false);
                   setMessage("There was an error. Please try again. If this persists, please send us an email with your registration info.");
