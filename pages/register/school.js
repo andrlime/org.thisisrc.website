@@ -76,11 +76,9 @@ const SchoolRegistration = () => {
       <div className={styles.submitModal} style={{display: (showModal) ? "block" : "none"}}>
         <div className={styles.wrapper}>
           <>
-          <img src="/check.svg"/>
+          <img src="../check.svg"/>
           <p>Success!</p>
-          <p>Your school code is</p>
-          <p style={{fontSize: "5rem", fontWeight: "900", color: "black", padding: "0.5rem", margin: "2rem"}}>{schoolCode}</p>
-          <p style={{fontWeight: "400"}}>Students must use this code to register. Take a screenshot of this page. Remember that the code is case-sensitive. We will reach out to you via email within 48 hours. If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
+          <p>We will reach out to you via email within 48 hours. Please check your inbox! If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
           </>
         </div>
       </div>
