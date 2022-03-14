@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/Q.module.css';
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import axios from 'axios';
 
 const Footer = (
@@ -43,10 +43,8 @@ const StudentRegistration = () => {
   //student info
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [studentSchoolCode, setStudentSchoolCode] = useState("");
   const [studentSchool, setStudentSchool] = useState("");
-  const [isValidSchool, setIsValidSchool] = useState(false);
 
   //project info
   const [projectTitle, setProjectTitle] = useState("");
@@ -61,6 +59,10 @@ const StudentRegistration = () => {
   //type
   const [description, setDesc] = useState("");
   const [showDesc, setShowDesc] = useState(false);
+
+  //ref
+  const isValidEmail = useRef(false);
+  const isValidSchool = useRef(false);
 
   let descriptions = [
     (<span>Visual Presentation of students’ project. Examples of display include research posters, prototypes, art work, etc. Display submissions are for students only.</span>),
@@ -122,18 +124,14 @@ const StudentRegistration = () => {
 
             <p id={styles.formsubhead}>Student Information</p>
             <span>Student Name: <input style={{border: `2px solid ${colors[0]}`}} value={studentName} onChange={(event) => (setStudentName(event.target.value))}></input></span><br/>
-            <span>Student Email: <input style={{border: `2px solid ${colors[studentEmail.length > 0 ? isValidEmail + 1 : 0]}`}} value={studentEmail} onChange={(event) => {
+            <span>Student Email: <input style={{border: `2px solid ${colors[studentEmail ? isValidEmail.current+1 : 0]}`}} value={studentEmail} onChange={(event) => {
               setStudentEmail(event.target.value);
               let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
-
-              if(event.target.value.match(rx) == event.target.value) {
-                setIsValidEmail(true);
-              } else {
-                setIsValidEmail(false);
-              }
+              isValidEmail.current = (event.target.value.match(rx) == event.target.value);
             }}></input></span><br/>
 
             <span>Preferred Pronouns: <select style={{border: `2px solid ${colors[0]}`}} value={pronouns} onChange={(event) => (setPronouns(event.target.value))}>
+              <option>Please Select</option>
               <option>he/him/his</option>  
               <option>she/her/hers</option> 
               <option>they/them/theirs</option>
@@ -148,14 +146,14 @@ const StudentRegistration = () => {
                 .then((res) => {
                   if(res.data != null) {
                     setStudentSchool(res.data.name);
-                    setIsValidSchool(true);
+                    isValidSchool.current = true;
                   } else {
                     setStudentSchool("Could not find your school.")
-                    setIsValidSchool(false);
+                    isValidSchool.current = false;
                   }
                 }).catch(err => {
                   setStudentSchool(`${err}`)
-                  setIsValidSchool(false);
+                  isValidSchool.current = false;
                 });
               }
             }}></input></span>&nbsp;<span>{studentSchool}</span><br/>
@@ -228,8 +226,8 @@ const StudentRegistration = () => {
             <button onClick={() => {
             //submit the form
             //test if all requirements are met
-            if(pronouns && studentName && studentEmail && studentSchool && isValidSchool && projectTitle &&
-              projectType && projectDescription && projectDisciplineOne && isValidEmail && (projectDescriptionLength < 250) && (showDisTwo==projectDisciplineTwo)
+            if(pronouns && studentName && studentEmail && studentSchool && isValidSchool.current && projectTitle &&
+              projectType && projectDescription && projectDisciplineOne && isValidEmail.current && (projectDescriptionLength < 250) && (showDisTwo==projectDisciplineTwo)
             ) {
 
               let student = {
@@ -256,7 +254,7 @@ const StudentRegistration = () => {
                   window.scrollTo(0, 0);
                 });
             } else {
-              setMessage("You didn't complete the form.");
+              setMessage("You didn't complete the form or your email was invalid.");
             }
             }}>Register</button>
           </div>

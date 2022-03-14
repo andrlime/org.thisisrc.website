@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/Q.module.css';
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import axios from 'axios';
 
 const Footer = (
@@ -41,10 +41,11 @@ const SchoolRegistration = () => {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactPosition, setContactPosition] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
   const [pronouns, setPronouns] = useState("");
+
+  const isValidEmail = useRef(false);
   
   return (
     <div className={styles.earth}>
@@ -95,18 +96,14 @@ const SchoolRegistration = () => {
 
             <p id={styles.formsubhead}>Contact Information</p>
             <span>Contact Name: <input style={{border: `2px solid ${colors[0]}`}} value={contactName} onChange={(event) => (setContactName(event.target.value))}></input></span><br/>
-            <span>Contact Email: <input style={{border: `2px solid ${colors[contactEmail.length > 0 ? isValidEmail + 1 : 0]}`}} value={contactEmail} onChange={(event) => {
+            <span>Contact Email: <input style={{border: `2px solid ${colors[contactEmail ? isValidEmail.current + 1 : 0]}`}} value={contactEmail} onChange={(event) => {
               setContactEmail(event.target.value);
               let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
-
-              if(event.target.value.match(rx) == event.target.value) {
-                setIsValidEmail(true);
-              } else {
-                setIsValidEmail(false);
-              }
+              isValidEmail.current = (event.target.value.match(rx) == event.target.value);
             }}></input></span><br/>
             
             <span>Preferred Pronouns: <select style={{border: `2px solid ${colors[0]}`}} value={pronouns} onChange={(event) => (setPronouns(event.target.value))}>
+              <option>Please Select</option>
               <option>he/him/his</option>  
               <option>she/her/hers</option> 
               <option>they/them/theirs</option>
@@ -127,7 +124,7 @@ const SchoolRegistration = () => {
             <button onClick={() => {
             //submit the form
             //test if all requirements are met
-            if(schoolName && contactName && contactEmail && contactPosition && isValidEmail && pronouns) {
+            if(schoolName && contactName && contactEmail && contactPosition && isValidEmail.current && pronouns) {
               let school = {
                 name: schoolName,
                 contact_name: contactName,
@@ -147,7 +144,7 @@ const SchoolRegistration = () => {
                   window.scrollTo(0, 0);
                 });
             } else {
-              setMessage("You didn't complete the form.");
+              setMessage("You didn't complete the form or your email was invalid.");
             }
             }}>Register</button>
           </div>
