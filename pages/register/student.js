@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/Q.module.css';
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import axios from 'axios';
 
 const Footer = (
@@ -36,6 +36,7 @@ const StudentRegistration = () => {
 
   const colors = ["#82318E", "#FF2211", "#119911"];
 
+  // modal state
   const [menu, setMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
@@ -43,16 +44,13 @@ const StudentRegistration = () => {
   //student info
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [studentSchoolCode, setStudentSchoolCode] = useState("");
   const [studentSchool, setStudentSchool] = useState("");
-  const [isValidSchool, setIsValidSchool] = useState(false);
 
   //project info
   const [projectTitle, setProjectTitle] = useState("");
   const [projectType, setProjectType] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
-  const [projectDescriptionLength, setProjectDescriptionLength] = useState(0);
   const [projectDisciplineOne, setProjectDisciplineOne] = useState("");
   const [showDisTwo, setShowDisTwo] = useState(false);
   const [projectDisciplineTwo, setProjectDisciplineTwo] = useState("");
@@ -61,6 +59,11 @@ const StudentRegistration = () => {
   //type
   const [description, setDesc] = useState("");
   const [showDesc, setShowDesc] = useState(false);
+
+  // useRefs
+  const isValidEmail = useRef(false);
+  const isValidSchool = useRef(false);
+  const projectDescriptionLength = useRef(0);
 
   let descriptions = [
     (<span>Visual Presentation of students’ project. Examples of display include research posters, prototypes, art work, etc. Display submissions are for students only.</span>),
@@ -125,15 +128,11 @@ const StudentRegistration = () => {
             <span>Student Email: <input style={{border: `2px solid ${colors[studentEmail.length > 0 ? isValidEmail + 1 : 0]}`}} value={studentEmail} onChange={(event) => {
               setStudentEmail(event.target.value);
               let rx = /((\w|[-]|[.])+[@]\w+([.]\w+)+)/g; //tests if it's an email
-
-              if(event.target.value.match(rx) == event.target.value) {
-                setIsValidEmail(true);
-              } else {
-                setIsValidEmail(false);
-              }
+              isValidEmail.current = (event.target.value.match(rx) == event.target.value);
             }}></input></span><br/>
 
             <span>Preferred Pronouns: <select style={{border: `2px solid ${colors[0]}`}} value={pronouns} onChange={(event) => (setPronouns(event.target.value))}>
+              <option>Please Select</option>
               <option>he/him/his</option>  
               <option>she/her/hers</option> 
               <option>they/them/theirs</option>
@@ -148,14 +147,14 @@ const StudentRegistration = () => {
                 .then((res) => {
                   if(res.data != null) {
                     setStudentSchool(res.data.name);
-                    setIsValidSchool(true);
+                    isValidSchool.current = true;
                   } else {
                     setStudentSchool("Could not find your school.")
-                    setIsValidSchool(false);
+                    isValidSchool.current = false;
                   }
                 }).catch(err => {
                   setStudentSchool(`${err}`)
-                  setIsValidSchool(false);
+                  isValidSchool.current = false;
                 });
               }
             }}></input></span>&nbsp;<span>{studentSchool}</span><br/>
@@ -193,8 +192,7 @@ const StudentRegistration = () => {
               <span>Description: <br/><textarea onChange={(event) => {
                 setProjectDescription(event.target.value);
                 let rx_words = /(\s)/g;
-                let wc = [...event.target.value.matchAll(rx_words)];
-                setProjectDescriptionLength(wc.length);
+                projectDescriptionLength.current = ([...event.target.value.matchAll(rx_words)].length)
               }} style={{border: `2px solid ${colors[0]}`}} value={projectDescription}></textarea>
               <span id={styles.wcword} style={{color: projectDescriptionLength>250 ? colors[2] : colors[0]}}>{projectDescriptionLength}/250</span>
               
