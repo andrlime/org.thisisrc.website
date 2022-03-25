@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Q.module.css';
 import React from 'react';
+import { FooterComp } from '../src/components';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class App extends React.Component {
 
   render() {
     let navjsx = (<div className={styles.nav} style={{backgroundColor: `rgba(165, 83, 176, ${this.state.opacity})`}}>
-    <a href="/"><img id={styles.logo} src="/this-logo.png" style={{width: `${this.state.logoSize}rem`}}/></a>
+    <a href="/"><img id={styles.logo} src="/logo_isrc.png" style={{width: `${this.state.logoSize}rem`}}/></a>
     <p style={{fontSize: `${this.state.logoSize*0.7}rem`}}>THIS ISRC</p>
     </div>)
 
@@ -47,7 +48,7 @@ class App extends React.Component {
       {date: new Date('2022-03-20T00:00:00'), desc: "Early Bird Registration Deadline"},
       {date: new Date('2022-04-08T00:00:00'), desc: "Registration Deadline"},
       {date: new Date('2022-04-28T00:00:00'), desc: "Submission Deadline"},
-      {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"},
+      {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"}
     ];
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -93,8 +94,7 @@ class App extends React.Component {
 
         <div className={styles.footer}>
 
-          <div className={styles.imgbox}><img src="logo-spartan.svg"/><img src="this-logo.png"/>
-          </div>
+          <FooterComp/>
 
           <div className={styles.text}>
           <span>Powered by React</span>
@@ -114,7 +114,7 @@ export default function Home() {
     <>
       <Head>
         <title>THIS ISRC 2022 - About Us</title>
-        <link rel="icon" href="/logo-spartan.svg" />
+        <link rel="icon" href="/logo_isrc.png" />
       </Head>
       <App/>
     </>
