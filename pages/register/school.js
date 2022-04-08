@@ -46,6 +46,8 @@ const SchoolRegistration = () => {
   const [pronouns, setPronouns] = useState("");
 
   const isValidEmail = useRef(false);
+
+  const EARLY_BIRD_TIME = new Date('2022-04-15T23:59:59');
   
   return (
     <div className={styles.earth}>
@@ -114,12 +116,12 @@ const SchoolRegistration = () => {
 
             <p style={{width: "50%"}}>You will receive a unique school code upon verification of information submitted and confirmation of payment receipt. Students will use this code to submit projects.</p>
 
-            <p>Payment Instruction: wire transfer {((new Date()) < 1647791999253) ? "¥450" : "¥650"}* to the following account:</p>
+            <p>Payment Instruction: wire transfer {((new Date()) < EARLY_BIRD_TIME) ? "¥450" : "¥650"}* to the following account:</p>
             <span><b>单位名称</b>: 北京市海淀区清华创新教育培训中心</span><br/>
             <span><b>帐号</b>: 01090352400120111115560</span><br/>
             <span>北京银行清华大学支行</span> 
             <p>Please include a payment memo: “School Name – ISRC payment"</p>
-            <span>*450 is the early bird price, which applies to registration before March 20th. 650 is the normal registration price, which applies to all other registrations.</span><br/><br/>
+            <span>*450 is the early bird price, which applies to registration before April 15th. 650 is the normal registration price, which applies to all other registrations.</span><br/><br/>
 
             <button onClick={() => {
             //submit the form

@@ -65,8 +65,8 @@ class App extends React.Component {
     ];
 
     let dates = [
-      {date: new Date('2022-03-20T00:00:00'), desc: "Early Bird Registration Deadline"},
-      {date: new Date('2022-04-08T00:00:00'), desc: "Registration Deadline"},
+      {date: new Date('2022-04-15T23:59:59'), desc: "Early Bird Registration Deadline"},
+      {date: new Date('2022-05-06T23:59:59'), desc: "Registration Deadline"},
       {date: new Date('2022-04-28T00:00:00'), desc: "Submission Deadline"},
       {date: new Date('2022-05-28T00:00:00'), desc: "Research Conference"}
     ];
