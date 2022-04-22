@@ -43,7 +43,6 @@ const StudentRegistration = () => {
   //student info
   const [studentName, setStudentName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
-  const [studentSchoolCode, setStudentSchoolCode] = useState("");
   const [studentSchool, setStudentSchool] = useState("");
 
   //project info
@@ -62,7 +61,6 @@ const StudentRegistration = () => {
 
   //ref
   const isValidEmail = useRef(false);
-  const isValidSchool = useRef(false);
 
   let descriptions = [
     (<span>Visual Presentation of students’ project. Examples of display include research posters, prototypes, art work, etc. Display submissions are for students only.</span>),
@@ -110,7 +108,7 @@ const StudentRegistration = () => {
           <>
           <img src="../check.svg"/>
           <p>Success!</p>
-          <p>We will reach out to you via email within 48 hours. Please check your inbox! If we do not reach out, please send us an email at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
+          <p>Now you have to pay. Please send ¥100 to the following QR code and include your name and school as a payment note. We will send you a confirmation email once we confirm your payment. If you do not see a QR code, please send us an email and we will send the picture to you. You can email us at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
           </>
         </div>
       </div>
@@ -138,24 +136,8 @@ const StudentRegistration = () => {
               <option>other</option>
             </select></span><br/>
 
-            <span>School Code (case sensitive!): <input style={{border: `2px solid ${colors[0]}`}} value={studentSchoolCode} onChange={(event) => {
-              setStudentSchoolCode(event.target.value);
-              if(event.target.value.length == 7) {
-                axios
-                .get(`https://ribbon.thisisrc.org/schools/${event.target.value}`)
-                .then((res) => {
-                  if(res.data != null) {
-                    setStudentSchool(res.data.name);
-                    isValidSchool.current = true;
-                  } else {
-                    setStudentSchool("Could not find your school.")
-                    isValidSchool.current = false;
-                  }
-                }).catch(err => {
-                  setStudentSchool(`${err}`)
-                  isValidSchool.current = false;
-                });
-              }
+            <span>School: <input style={{border: `2px solid ${colors[0]}`}} value={studentSchool} onChange={(event) => {
+              setStudentSchool(event.target.value);
             }}></input></span>&nbsp;<span>{studentSchool}</span><br/>
 
             <p id={styles.formsubhead}>Project Information</p>
@@ -226,7 +208,7 @@ const StudentRegistration = () => {
             <button onClick={() => {
             //submit the form
             //test if all requirements are met
-            if(pronouns && studentName && studentEmail && studentSchool && isValidSchool.current && projectTitle &&
+            if(pronouns && studentName && studentEmail && studentSchool && projectTitle &&
               projectType && projectDescription && projectDisciplineOne && isValidEmail.current && (projectDescriptionLength < 250) && (showDisTwo==projectDisciplineTwo)
             ) {
 
@@ -237,7 +219,7 @@ const StudentRegistration = () => {
                 project_type: projectType,
                 project_title: projectTitle,
                 project_description: projectDescription,
-                school: studentSchoolCode,
+                school: studentSchool,
                 pronouns: pronouns
               };
 

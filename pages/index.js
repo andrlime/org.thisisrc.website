@@ -191,10 +191,9 @@ class App extends React.Component {
 
                 <p id={styles.tltext}>Registration Instructions</p>
                 <ol>
-                  <li>Register your school <a href="/register/school">here</a>. <b>Each registration fee includes 10 student submissions. If you wish to register more students, please email us at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a></b></li>
-                  <li>Remember to pay! Payment information can be found on the <a href="/register/school">school registration page</a>. The early-bird fee is ¥450 and the non early-bird fee is ¥650.</li>
-                  <li>When you register, you are assigned a 6 digit school code. Write this down and give it to your students to use when they register.</li>
-                  <li>Have your students register at <a href="register/student">this link</a>. When they register, make sure they use the right school code.</li>
+                  <li>Register at <a href="/register/student">here</a>.</li>
+                  <li>Remember to pay! Cost per entry is ¥100.</li>
+                  <li>Wait for our confirmation email. We will email you once we confirm your payment. If you do not receive an email, feel free to reach out!</li>
                 </ol><br/>
 
               </div>
