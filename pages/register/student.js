@@ -109,6 +109,7 @@ const StudentRegistration = () => {
           <img src="../check.svg"/>
           <p>Success!</p>
           <p>Now you have to pay. Please send ¥100 to the following QR code and include your name and school as a payment note. We will send you a confirmation email once we confirm your payment. If you do not see a QR code, please send us an email and we will send the picture to you. You can email us at <a href="mailto:isrc@this.edu.cn">isrc@this.edu.cn</a>.</p>
+          <img src="../payment.jpg"/>
           </>
         </div>
       </div>
