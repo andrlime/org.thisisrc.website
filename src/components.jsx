@@ -1,14 +1,17 @@
-import React from "react";
-import styles from '../styles/Q.module.css';
+import React from 'react'
+import styles from '../styles/Q.module.css'
 
 export const FooterComp = () => {
-    return (
-        <div className={styles.imgbox}><img src="logo_isrc.png"/><img src="school_logo_highres.png"/></div>
-    )
+  return (
+    <div className={styles.imgbox}>
+      <img src='logo_isrc.png' />
+      <img src='school_logo_highres.png' />
+    </div>
+  )
 }
 
 module.exports = {
-    FooterComp: FooterComp
-};
+  FooterComp: FooterComp
+}
 
-export default FooterComp;
+export default FooterComp
